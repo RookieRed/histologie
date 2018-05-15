@@ -1,0 +1,42 @@
+08:58:40 Database DEBUG : Connecté à la base de données
+08:58:40 Database DEBUG : Connecté à la base de données
+08:59:22 Database DEBUG : Connecté à la base de données
+08:59:22 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+08:59:22 Database DEBUG : Connecté à la base de données
+08:59:23 Database DEBUG : Connecté à la base de données
+08:59:24 Database DEBUG : Connecté à la base de données
+08:59:25 Database DEBUG : Connecté à la base de données
+08:59:27 Database DEBUG : Connecté à la base de données
+10:07:44 Database DEBUG : Connecté à la base de données
+10:35:47 Database DEBUG : Connecté à la base de données
+10:35:51 Database DEBUG : Connecté à la base de données
+10:35:53 Database DEBUG : Connecté à la base de données
+10:35:54 Application INFO : Utilisateur connecté : deborah.carper@inserm.fr ( 33 )
+10:35:54 Database DEBUG : Connecté à la base de données
+10:35:56 Database DEBUG : Connecté à la base de données
+10:35:58 Database DEBUG : Connecté à la base de données
+10:49:52 Database DEBUG : Connecté à la base de données
+10:49:53 Database DEBUG : Connecté à la base de données
+10:52:04 Database DEBUG : Connecté à la base de données
+11:12:53 Database DEBUG : Connecté à la base de données
+11:12:54 Database DEBUG : Connecté à la base de données
+11:41:33 Database DEBUG : Connecté à la base de données
+11:41:38 Database DEBUG : Connecté à la base de données
+11:41:40 Database DEBUG : Connecté à la base de données
+13:08:13 Database DEBUG : Connecté à la base de données
+13:08:19 Database DEBUG : Connecté à la base de données
+13:08:20 Database DEBUG : Connecté à la base de données
+14:30:33 Database DEBUG : Connecté à la base de données
+14:30:36 Database DEBUG : Connecté à la base de données
+14:30:36 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => deborah.carper@inserm.fr
+    [name] => Deborah Carper
+)
+.
+14:30:36 Mail DEBUG : Mail envoyé.
+14:30:36 Application INFO : Retour validée avec succès par l'administrateur #6
+15:12:25 Database DEBUG : Connecté à la base de données
+16:50:43 Database DEBUG : Connecté à la base de données
+16:50:44 Database DEBUG : Connecté à la base de données
+16:50:46 Database DEBUG : Connecté à la base de données

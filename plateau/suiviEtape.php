@@ -1,0 +1,100 @@
+<?php
+require "../inc/include.php";
+if(empty($_GET['type']) || ($_GET['type'] != "P" && $_GET['type'] != "C"))
+{
+    header("Location: index.php");
+    exit;
+}
+$type = $_GET['type'];
+if(empty($_GET['etape']) || $_GET['etape'] < 1 || $_GET['etape'] > 5)
+{
+    header("Location: suivi.php");
+    exit;
+}
+$etape = $_GET['etape'];
+$title = "Suivi " . ($type == "P" ? "Paraffine" : "Cryo");
+require "../inc/header.php";
+?>
+<div class="container">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><?=$title?></div>
+            <div class="panel-body">
+                <h3><?=$descEtapes[$etape]["nom"]?></h3>
+                <?php
+                $lignes = call_user_func($descEtapes[$etape]['methodes']['get'], $type);
+                if(!empty($lignes))
+                {
+                ?>
+                <input type="hidden" id="etape" value="<?=$etape?>">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectionnerLignes"></th>
+                            <?php
+                            $keys = array_keys($lignes[0]);
+                            unset($keys[0]);
+                            foreach($keys as $key)
+                            {
+                            ?>
+                            <th><?=$key?></th>
+                            <?php
+                            }
+                            ?>
+                            <th>Date</th>
+                            <?php
+                            if($etape == 5)
+                            {
+                                ?>
+                            <th>Commentaire</th>
+                                <?php
+                            }
+                            ?>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+                        foreach($lignes as $ligne)
+                        {
+                        ?>
+                        <tr data-id="<?=$ligne['id']?>">
+                            <td><input type="checkbox"></td>
+                            <?php
+                            foreach($keys as $key)
+                            {
+                            ?>
+                            <td><?=$ligne[$key]?></td>
+                            <?php
+                            }
+                            ?>
+                            <td><input type="text" class="datepicker" value="<?=date("d-m-Y")?>"></td>
+                            <?php
+                            if($etape == 5)
+                            {
+                                ?>
+                            <td><textarea placeholder="Commentaire" class="form-control"></textarea></td>
+                                <?php
+                            }
+                            ?>
+                            <td><input type="button" class="btn btn-default btn-sm validerLigne" value="OK"></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <?php
+                }
+                ?>
+                <a href="suivi.php?type=<?=$type?>" class="btn btn-default">Précédent</a>
+                <button class="btn btn-primary pull-right" id="validerLignes">Valider les lignes sélectionnées</button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+$scripts = ["suiviEtape.js"];
+require "../inc/footer.php";
+?>

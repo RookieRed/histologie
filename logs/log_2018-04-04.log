@@ -1,0 +1,31 @@
+09:20:48 Database DEBUG : Connecté à la base de données
+09:20:48 Database DEBUG : Connecté à la base de données
+09:20:52 Database DEBUG : Connecté à la base de données
+09:20:52 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+09:20:52 Database DEBUG : Connecté à la base de données
+09:20:59 Database DEBUG : Connecté à la base de données
+11:38:19 Database DEBUG : Connecté à la base de données
+11:38:23 Database DEBUG : Connecté à la base de données
+11:38:23 Application INFO : Inclusion validée avec succès par l'administrateur #6
+12:08:22 Database DEBUG : Connecté à la base de données
+12:09:34 Database DEBUG : Connecté à la base de données
+12:09:48 Database DEBUG : Connecté à la base de données
+12:09:49 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => jean.personnaz@inserm.fr
+    [name] => Jean Personnaz
+)
+.
+12:09:49 Mail DEBUG : Mail envoyé.
+12:09:49 Application INFO : Retour validée avec succès par l'administrateur #6
+12:13:08 Database DEBUG : Connecté à la base de données
+12:13:09 Database DEBUG : Connecté à la base de données
+12:13:10 Database DEBUG : Connecté à la base de données
+15:01:17 Database DEBUG : Connecté à la base de données
+15:01:18 Database DEBUG : Connecté à la base de données
+15:01:19 Database DEBUG : Connecté à la base de données
+15:01:21 Database DEBUG : Connecté à la base de données
+15:47:01 Database DEBUG : Connecté à la base de données
+16:49:17 Database DEBUG : Connecté à la base de données
+16:49:17 Application INFO : Coupe validée avec succès par l'administrateur #6
+16:49:19 Database DEBUG : Connecté à la base de données

@@ -1,0 +1,47 @@
+10:32:08 Database DEBUG : Connecté à la base de données
+10:32:13 Database DEBUG : Connecté à la base de données
+10:32:35 Database DEBUG : Connecté à la base de données
+10:32:35 Application INFO : Utilisateur connecté : enzo.piccolo ( 38 )
+10:32:35 Database DEBUG : Connecté à la base de données
+10:32:47 Database DEBUG : Connecté à la base de données
+10:32:56 Database DEBUG : Connecté à la base de données
+10:34:05 Database DEBUG : Connecté à la base de données
+10:34:05 Database DEBUG : Connecté à la base de données
+10:34:33 Database DEBUG : Connecté à la base de données
+10:34:33 Database DEBUG : Connecté à la base de données
+10:34:41 Database DEBUG : Connecté à la base de données
+10:34:41 Application INFO : Commande #129 créée par l'utilisateur 38
+10:34:41 Database DEBUG : Connecté à la base de données
+10:46:39 Database DEBUG : Connecté à la base de données
+10:46:39 Database DEBUG : Connecté à la base de données
+10:46:42 Database DEBUG : Connecté à la base de données
+10:46:42 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+10:46:42 Database DEBUG : Connecté à la base de données
+10:46:43 Database DEBUG : Connecté à la base de données
+10:46:45 Database DEBUG : Connecté à la base de données
+10:46:49 Database DEBUG : Connecté à la base de données
+10:46:49 Application INFO : Réception validée avec succès par l'administrateur #6
+10:46:51 Database DEBUG : Connecté à la base de données
+10:46:52 Database DEBUG : Connecté à la base de données
+15:55:37 Database DEBUG : Connecté à la base de données
+15:55:38 Database DEBUG : Connecté à la base de données
+15:55:40 Database DEBUG : Connecté à la base de données
+15:55:45 Database DEBUG : Connecté à la base de données
+15:55:45 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => deborah.carper@inserm.fr
+    [name] => Deborah Carper
+)
+.
+15:55:45 Mail DEBUG : Mail envoyé.
+15:55:45 Application INFO : Retour validée avec succès par l'administrateur #6
+15:55:48 Database DEBUG : Connecté à la base de données
+18:16:20 Database DEBUG : Connecté à la base de données
+18:16:20 Database DEBUG : Connecté à la base de données
+18:16:22 Database DEBUG : Connecté à la base de données
+18:16:22 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+18:16:22 Database DEBUG : Connecté à la base de données
+18:16:35 Database DEBUG : Connecté à la base de données
+18:16:36 Database DEBUG : Connecté à la base de données
+18:17:16 Database DEBUG : Connecté à la base de données
+18:17:16 Application INFO : Coupe validée avec succès par l'administrateur #6

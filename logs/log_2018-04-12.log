@@ -1,0 +1,42 @@
+09:54:57 Database DEBUG : Connecté à la base de données
+09:54:58 Database DEBUG : Connecté à la base de données
+09:55:42 Database DEBUG : Connecté à la base de données
+09:55:42 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+09:55:42 Database DEBUG : Connecté à la base de données
+09:57:10 Database DEBUG : Connecté à la base de données
+09:58:05 Database DEBUG : Connecté à la base de données
+09:58:10 Database DEBUG : Connecté à la base de données
+09:58:10 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => alizee.dortignac@inserm.fr
+    [name] => Alizee Dortignac
+)
+.
+09:58:10 Mail DEBUG : Mail envoyé.
+09:58:10 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => alizee.dortignac@inserm.fr
+    [name] => Alizee Dortignac
+)
+.
+09:58:10 Mail DEBUG : Mail envoyé.
+09:58:10 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => enzo.piccolo@inserm.fr
+    [name] => Enzo Piccolo
+)
+.
+09:58:10 Mail DEBUG : Mail envoyé.
+09:58:10 Application INFO : Retour validée avec succès par l'administrateur #6
+09:58:11 Database DEBUG : Connecté à la base de données
+12:00:15 Database DEBUG : Connecté à la base de données
+15:11:58 Database DEBUG : Connecté à la base de données
+15:11:58 Database DEBUG : Connecté à la base de données
+15:12:00 Database DEBUG : Connecté à la base de données
+15:12:00 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+15:12:00 Database DEBUG : Connecté à la base de données
+15:12:03 Database DEBUG : Connecté à la base de données
+15:12:05 Database DEBUG : Connecté à la base de données
+15:12:07 Database DEBUG : Connecté à la base de données
+15:12:07 Application INFO : Inclusion validée avec succès par l'administrateur #6
+17:17:00 Database DEBUG : Connecté à la base de données

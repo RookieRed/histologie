@@ -1,0 +1,75 @@
+14:07:35 Database DEBUG : Connecté à la base de données
+14:07:35 Database DEBUG : Connecté à la base de données
+14:07:42 Database DEBUG : Connecté à la base de données
+14:07:42 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+14:07:42 Database DEBUG : Connecté à la base de données
+14:07:43 Database DEBUG : Connecté à la base de données
+14:07:45 Database DEBUG : Connecté à la base de données
+14:07:52 Database DEBUG : Connecté à la base de données
+14:07:52 Application INFO : Réception validée avec succès par l'administrateur #6
+14:07:54 Database DEBUG : Connecté à la base de données
+14:08:02 Database DEBUG : Connecté à la base de données
+14:08:28 Database DEBUG : Connecté à la base de données
+14:08:30 Database DEBUG : Connecté à la base de données
+14:08:57 Database DEBUG : Connecté à la base de données
+14:08:57 Application INFO : Inclusion validée avec succès par l'administrateur #6
+14:09:10 Database DEBUG : Connecté à la base de données
+14:09:10 Application INFO : Inclusion validée avec succès par l'administrateur #6
+14:09:12 Database DEBUG : Connecté à la base de données
+14:09:14 Database DEBUG : Connecté à la base de données
+14:09:16 Database DEBUG : Connecté à la base de données
+14:09:18 Database DEBUG : Connecté à la base de données
+14:10:00 Database DEBUG : Connecté à la base de données
+14:10:00 Application INFO : Coloration validée avec succès par l'administrateur #6
+16:04:12 Database DEBUG : Connecté à la base de données
+16:04:21 Database DEBUG : Connecté à la base de données
+16:04:22 Application INFO : Utilisateur connecté : jean.personnaz@inserm.fr ( 10 )
+16:04:22 Database DEBUG : Connecté à la base de données
+16:04:24 Database DEBUG : Connecté à la base de données
+16:04:26 Database DEBUG : Connecté à la base de données
+16:04:44 Database DEBUG : Connecté à la base de données
+16:04:44 Database DEBUG : Connecté à la base de données
+16:04:53 Database DEBUG : Connecté à la base de données
+16:04:53 Database DEBUG : Connecté à la base de données
+16:05:20 Database DEBUG : Connecté à la base de données
+16:05:20 Application INFO : Commande #87 créée par l'utilisateur 10
+16:05:20 Database DEBUG : Connecté à la base de données
+16:09:13 Database DEBUG : Connecté à la base de données
+16:09:14 Database DEBUG : Connecté à la base de données
+16:09:15 Database DEBUG : Connecté à la base de données
+16:09:36 Database DEBUG : Connecté à la base de données
+16:09:36 Application INFO : Réception validée avec succès par l'administrateur #6
+16:10:23 Database DEBUG : Connecté à la base de données
+16:10:25 Database DEBUG : Connecté à la base de données
+16:10:28 Database DEBUG : Connecté à la base de données
+16:10:28 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => jean.personnaz@inserm.fr
+    [name] => Jean Personnaz
+)
+.
+16:10:28 Mail DEBUG : Mail envoyé.
+16:10:28 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => jean.personnaz@inserm.fr
+    [name] => Jean Personnaz
+)
+.
+16:10:28 Mail DEBUG : Mail envoyé.
+16:10:28 Application INFO : Retour validée avec succès par l'administrateur #6
+16:11:28 Database DEBUG : Connecté à la base de données
+16:11:29 Database DEBUG : Connecté à la base de données
+16:11:32 Database DEBUG : Connecté à la base de données
+16:11:32 Application INFO : Réception validée avec succès par l'administrateur #6
+16:11:33 Database DEBUG : Connecté à la base de données
+16:11:35 Database DEBUG : Connecté à la base de données
+16:11:37 Database DEBUG : Connecté à la base de données
+16:11:37 Application INFO : Inclusion validée avec succès par l'administrateur #6
+16:16:56 Database DEBUG : Connecté à la base de données
+16:17:01 Database DEBUG : Connecté à la base de données
+16:17:14 Database DEBUG : Connecté à la base de données
+16:17:14 Application INFO : Coloration validée avec succès par l'administrateur #6
+16:17:17 Database DEBUG : Connecté à la base de données
+16:17:19 Database DEBUG : Connecté à la base de données
+16:17:20 Database DEBUG : Connecté à la base de données
+16:17:22 Database DEBUG : Connecté à la base de données

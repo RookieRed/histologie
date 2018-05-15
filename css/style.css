@@ -1,0 +1,74 @@
+html {
+    height:100%;
+}
+
+body {
+    position: relative;
+    padding-bottom: 70px;
+    min-height:100%;
+}
+
+textarea { resize: vertical; }
+
+.btn:not(.btn-sm):not(.btn-xs):not(.btn-lg) {
+    height:34px;
+}
+
+footer {
+    width:100%;
+    text-align: center;
+    height : 50px;
+    position: absolute;
+    bottom:0;
+    border-top: solid #ddd 1px;
+    padding-top: 15px;
+    background-color: #eee;
+}
+
+input[type="number"] {
+    width: 70px;
+}
+
+.suivi td {
+    padding-right: 15px;
+}
+
+.form-archives {
+    border: solid #ddd 1px;
+    padding: 15px;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.table-archives {
+    border: solid #ddd 1px;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.table-archives td {
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+
+}
+
+.table-archives > thead > tr > th {
+    border-top:none;
+}
+
+.navbar {
+    height: 80px;
+}
+
+.navbar-nav > li > .navbar-brand
+{
+    padding-top: 10px;
+}
+
+.navbar-text
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

@@ -1,0 +1,71 @@
+09:00:37 Database DEBUG : Connecté à la base de données
+09:00:53 Database DEBUG : Connecté à la base de données
+09:00:53 Application INFO : Utilisateur connecté : emilie.segura@inserm.fr ( 21 )
+09:00:53 Database DEBUG : Connecté à la base de données
+09:00:55 Database DEBUG : Connecté à la base de données
+09:45:23 Database DEBUG : Connecté à la base de données
+09:45:23 Database DEBUG : Connecté à la base de données
+09:45:28 Database DEBUG : Connecté à la base de données
+09:45:28 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+09:45:28 Database DEBUG : Connecté à la base de données
+09:45:29 Database DEBUG : Connecté à la base de données
+09:45:31 Database DEBUG : Connecté à la base de données
+09:45:47 Database DEBUG : Connecté à la base de données
+09:45:47 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => christophe.heymes@inserm.fr
+    [name] => Christophe Heymes
+)
+.
+09:45:47 Mail DEBUG : Mail envoyé.
+09:45:47 Application INFO : Retour validée avec succès par l'administrateur #6
+09:45:49 Database DEBUG : Connecté à la base de données
+09:45:51 Database DEBUG : Connecté à la base de données
+09:45:56 Database DEBUG : Connecté à la base de données
+09:47:56 Database DEBUG : Connecté à la base de données
+10:25:54 Database DEBUG : Connecté à la base de données
+10:25:54 Application INFO : Coupe validée avec succès par l'administrateur #6
+10:27:03 Database DEBUG : Connecté à la base de données
+11:03:39 Database DEBUG : Connecté à la base de données
+11:03:42 Database DEBUG : Connecté à la base de données
+11:03:42 Application INFO : Réception validée avec succès par l'administrateur #6
+11:28:13 Database DEBUG : Connecté à la base de données
+11:28:15 Database DEBUG : Connecté à la base de données
+11:28:37 Database DEBUG : Connecté à la base de données
+11:28:37 Application INFO : Coupe validée avec succès par l'administrateur #6
+11:28:40 Database DEBUG : Connecté à la base de données
+13:29:02 Database DEBUG : Connecté à la base de données
+13:29:13 Database DEBUG : Connecté à la base de données
+13:29:13 Application INFO : Utilisateur connecté : emilie.segura@inserm.fr ( 21 )
+13:29:13 Database DEBUG : Connecté à la base de données
+13:29:14 Database DEBUG : Connecté à la base de données
+13:29:17 Database DEBUG : Connecté à la base de données
+13:30:53 Database DEBUG : Connecté à la base de données
+13:30:53 Database DEBUG : Connecté à la base de données
+13:31:17 Database DEBUG : Connecté à la base de données
+13:31:17 Database DEBUG : Connecté à la base de données
+13:31:59 Database DEBUG : Connecté à la base de données
+13:31:59 Database DEBUG : Connecté à la base de données
+13:32:41 Database DEBUG : Connecté à la base de données
+13:32:59 Database DEBUG : Connecté à la base de données
+13:32:59 Database DEBUG : Connecté à la base de données
+13:33:02 Database DEBUG : Connecté à la base de données
+13:33:08 Database DEBUG : Connecté à la base de données
+13:33:08 Database DEBUG : Connecté à la base de données
+13:34:17 Database DEBUG : Connecté à la base de données
+13:34:17 Application INFO : Commande #48 créée par l'utilisateur 21
+13:34:17 Database DEBUG : Connecté à la base de données
+15:57:51 Database DEBUG : Connecté à la base de données
+15:57:51 Database DEBUG : Connecté à la base de données
+15:57:55 Database DEBUG : Connecté à la base de données
+15:57:55 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+15:57:55 Database DEBUG : Connecté à la base de données
+15:57:56 Database DEBUG : Connecté à la base de données
+15:57:58 Database DEBUG : Connecté à la base de données
+15:58:02 Database DEBUG : Connecté à la base de données
+16:09:42 Database DEBUG : Connecté à la base de données
+16:09:44 Database DEBUG : Connecté à la base de données
+16:43:09 Database DEBUG : Connecté à la base de données
+16:43:12 Database DEBUG : Connecté à la base de données
+16:43:12 Application INFO : Réception validée avec succès par l'administrateur #6
+16:43:14 Database DEBUG : Connecté à la base de données

@@ -1,0 +1,89 @@
+08:56:15 Database DEBUG : Connecté à la base de données
+08:56:21 Database DEBUG : Connecté à la base de données
+08:56:27 Database DEBUG : Connecté à la base de données
+08:56:28 Application INFO : Utilisateur connecté : enzo.piccolo ( 38 )
+08:56:28 Database DEBUG : Connecté à la base de données
+08:56:30 Database DEBUG : Connecté à la base de données
+08:56:58 Database DEBUG : Connecté à la base de données
+08:57:50 Database DEBUG : Connecté à la base de données
+08:57:50 Database DEBUG : Connecté à la base de données
+08:58:45 Database DEBUG : Connecté à la base de données
+08:58:45 Database DEBUG : Connecté à la base de données
+08:58:49 Database DEBUG : Connecté à la base de données
+08:58:49 Application INFO : Commande #204 créée par l'utilisateur 38
+08:58:49 Database DEBUG : Connecté à la base de données
+09:01:07 Database DEBUG : Connecté à la base de données
+09:01:09 Database DEBUG : Connecté à la base de données
+09:01:13 Database DEBUG : Connecté à la base de données
+09:01:32 Database DEBUG : Connecté à la base de données
+09:01:37 Database DEBUG : Connecté à la base de données
+09:02:54 Database DEBUG : Connecté à la base de données
+09:02:54 Database DEBUG : Connecté à la base de données
+09:03:11 Database DEBUG : Connecté à la base de données
+09:03:11 Database DEBUG : Connecté à la base de données
+09:03:14 Database DEBUG : Connecté à la base de données
+09:03:14 Application INFO : Commande #205 créée par l'utilisateur 38
+09:03:14 Database DEBUG : Connecté à la base de données
+09:03:37 Database DEBUG : Connecté à la base de données
+09:03:50 Database DEBUG : Connecté à la base de données
+09:03:50 Database DEBUG : Connecté à la base de données
+09:03:52 Database DEBUG : Connecté à la base de données
+09:03:52 Database DEBUG : Connecté à la base de données
+09:03:57 Database DEBUG : Connecté à la base de données
+09:03:57 Database DEBUG : Connecté à la base de données
+09:04:07 Database DEBUG : Connecté à la base de données
+09:04:08 Database DEBUG : Connecté à la base de données
+09:04:12 Database DEBUG : Connecté à la base de données
+09:05:08 Database DEBUG : Connecté à la base de données
+09:05:08 Database DEBUG : Connecté à la base de données
+09:05:34 Database DEBUG : Connecté à la base de données
+09:05:34 Database DEBUG : Connecté à la base de données
+09:07:03 Database DEBUG : Connecté à la base de données
+09:07:03 Application INFO : Commande #206 créée par l'utilisateur 38
+09:07:03 Database DEBUG : Connecté à la base de données
+14:09:23 Database DEBUG : Connecté à la base de données
+14:09:23 Database DEBUG : Connecté à la base de données
+14:09:25 Database DEBUG : Connecté à la base de données
+14:09:25 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+14:09:25 Database DEBUG : Connecté à la base de données
+14:09:26 Database DEBUG : Connecté à la base de données
+14:09:28 Database DEBUG : Connecté à la base de données
+14:09:47 Database DEBUG : Connecté à la base de données
+14:09:47 Application INFO : Réception validée avec succès par l'administrateur #6
+14:09:50 Database DEBUG : Connecté à la base de données
+14:09:53 Database DEBUG : Connecté à la base de données
+14:10:01 Database DEBUG : Connecté à la base de données
+14:10:01 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => marie.bellio@inserm.fr
+    [name] => Marie Bellio
+)
+.
+14:10:01 Mail DEBUG : Mail envoyé.
+14:10:01 Application INFO : Retour validée avec succès par l'administrateur #6
+14:10:53 Database DEBUG : Connecté à la base de données
+15:31:38 Database DEBUG : Connecté à la base de données
+15:31:55 Database DEBUG : Connecté à la base de données
+15:31:56 Application INFO : Utilisateur connecté : emilie.segura@inserm.fr ( 21 )
+15:31:56 Database DEBUG : Connecté à la base de données
+15:31:57 Database DEBUG : Connecté à la base de données
+15:31:59 Database DEBUG : Connecté à la base de données
+15:32:21 Database DEBUG : Connecté à la base de données
+15:32:21 Database DEBUG : Connecté à la base de données
+15:32:37 Database DEBUG : Connecté à la base de données
+15:32:37 Database DEBUG : Connecté à la base de données
+15:32:52 Database DEBUG : Connecté à la base de données
+15:32:52 Application INFO : Commande #207 créée par l'utilisateur 21
+15:32:52 Database DEBUG : Connecté à la base de données
+15:40:44 Database DEBUG : Connecté à la base de données
+15:40:48 Database DEBUG : Connecté à la base de données
+15:40:48 Application INFO : Réception validée avec succès par l'administrateur #6
+15:40:57 Database DEBUG : Connecté à la base de données
+15:40:57 Application INFO : Réception validée avec succès par l'administrateur #6
+15:40:59 Database DEBUG : Connecté à la base de données
+15:41:01 Database DEBUG : Connecté à la base de données
+15:41:02 Database DEBUG : Connecté à la base de données
+15:41:03 Database DEBUG : Connecté à la base de données
+15:41:05 Database DEBUG : Connecté à la base de données
+15:41:05 Application INFO : Réception validée avec succès par l'administrateur #6
+16:10:29 Database DEBUG : Connecté à la base de données

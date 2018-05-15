@@ -1,0 +1,89 @@
+09:52:00 Database DEBUG : Connecté à la base de données
+09:52:00 Database DEBUG : Connecté à la base de données
+09:52:05 Database DEBUG : Connecté à la base de données
+09:52:05 Application INFO : Administrateur connecté : lucie.fontaine ( 6 )
+09:52:05 Database DEBUG : Connecté à la base de données
+09:52:08 Database DEBUG : Connecté à la base de données
+09:52:10 Database DEBUG : Connecté à la base de données
+09:52:55 Database DEBUG : Connecté à la base de données
+09:52:55 Application INFO : Coupe validée avec succès par l'administrateur #6
+09:53:15 Database DEBUG : Connecté à la base de données
+09:53:15 Application INFO : Coupe validée avec succès par l'administrateur #6
+09:53:34 Database DEBUG : Connecté à la base de données
+09:53:36 Database DEBUG : Connecté à la base de données
+09:53:41 Database DEBUG : Connecté à la base de données
+09:53:41 Application INFO : Coloration validée avec succès par l'administrateur #6
+09:53:43 Database DEBUG : Connecté à la base de données
+09:53:44 Database DEBUG : Connecté à la base de données
+09:53:48 Database DEBUG : Connecté à la base de données
+09:53:48 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => sophie.branka@inserm.fr
+    [name] => Sophie Branka
+)
+.
+09:53:48 Mail DEBUG : Mail envoyé.
+09:53:48 Application INFO : Retour validée avec succès par l'administrateur #6
+09:53:51 Database DEBUG : Connecté à la base de données
+12:31:44 Database DEBUG : Connecté à la base de données
+12:31:55 Database DEBUG : Connecté à la base de données
+12:31:55 Application INFO : Inclusion validée avec succès par l'administrateur #6
+12:32:12 Database DEBUG : Connecté à la base de données
+12:32:12 Application INFO : Inclusion validée avec succès par l'administrateur #6
+14:30:07 Database DEBUG : Connecté à la base de données
+14:30:07 Database DEBUG : Connecté à la base de données
+14:30:08 Database DEBUG : Connecté à la base de données
+14:30:09 Application INFO : Utilisateur connecté : marie.cauquil ( 20 )
+14:30:09 Database DEBUG : Connecté à la base de données
+14:30:10 Database DEBUG : Connecté à la base de données
+14:35:43 Database DEBUG : Connecté à la base de données
+14:37:30 Database DEBUG : Connecté à la base de données
+14:37:30 Database DEBUG : Connecté à la base de données
+14:37:48 Database DEBUG : Connecté à la base de données
+14:37:48 Database DEBUG : Connecté à la base de données
+14:38:17 Database DEBUG : Connecté à la base de données
+14:38:17 Application INFO : Commande #68 créée par l'utilisateur 20
+14:38:17 Database DEBUG : Connecté à la base de données
+14:38:44 Database DEBUG : Connecté à la base de données
+14:38:45 Database DEBUG : Connecté à la base de données
+14:41:32 Database DEBUG : Connecté à la base de données
+14:41:32 Application INFO : Inclusion validée avec succès par l'administrateur #6
+14:41:34 Database DEBUG : Connecté à la base de données
+14:41:36 Database DEBUG : Connecté à la base de données
+14:41:44 Database DEBUG : Connecté à la base de données
+14:41:45 Database DEBUG : Connecté à la base de données
+14:41:47 Database DEBUG : Connecté à la base de données
+14:41:48 Database DEBUG : Connecté à la base de données
+14:41:51 Database DEBUG : Connecté à la base de données
+14:44:12 Database DEBUG : Connecté à la base de données
+14:55:45 Database DEBUG : Connecté à la base de données
+14:55:45 Database DEBUG : Connecté à la base de données
+14:55:59 Database DEBUG : Connecté à la base de données
+14:55:59 Database DEBUG : Connecté à la base de données
+14:56:02 Database DEBUG : Connecté à la base de données
+14:56:02 Application INFO : Commande #69 créée par l'utilisateur 20
+14:56:02 Database DEBUG : Connecté à la base de données
+15:03:26 Database DEBUG : Connecté à la base de données
+15:03:29 Database DEBUG : Connecté à la base de données
+15:03:29 Application INFO : Réception validée avec succès par l'administrateur #6
+15:03:31 Database DEBUG : Connecté à la base de données
+16:33:21 Database DEBUG : Connecté à la base de données
+16:33:25 Database DEBUG : Connecté à la base de données
+17:04:46 Database DEBUG : Connecté à la base de données
+17:04:51 Database DEBUG : Connecté à la base de données
+17:04:51 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => christophe.heymes@inserm.fr
+    [name] => Christophe Heymes
+)
+.
+17:04:51 Mail DEBUG : Mail envoyé.
+17:04:51 Mail DEBUG : Trying to send mail mail_commande_prete from histologie-i2mc@inserm.fr to Array
+(
+    [mail] => christophe.heymes@inserm.fr
+    [name] => Christophe Heymes
+)
+.
+17:04:51 Mail DEBUG : Mail envoyé.
+17:04:51 Application INFO : Retour validée avec succès par l'administrateur #6
+17:09:19 Database DEBUG : Connecté à la base de données
