@@ -1,4 +1,4 @@
-cfg
+cfg/
 !cfg/.htaccess
 .idea/
 *.iml
