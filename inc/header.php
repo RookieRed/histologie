@@ -42,9 +42,11 @@
                 ?>
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
+                        <?php if(estConnecte()) { ?>
                         <li>
                             <a href="<?=$path?>/logout.php">Déconnexion</a>
                         </li>
+                        <?php } ?>
                         <li>
                             <a href="index.php" class="navbar-brand"><img src="<?=$path?>/img/histo.jpg" alt="Logo histographie"/></a>
                         </li>

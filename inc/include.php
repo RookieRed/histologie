@@ -357,6 +357,13 @@ if(isset($_SESSION['idAdministrateur']))
 {
     $administrateur = $db->getAdministrateur($_SESSION['idAdministrateur']);
 }
+
+function estConnecte(): bool {
+    global $utilisateur;
+    global $administrateur;
+    return isset($_SESSION['idAdministrateur'], $utilisateur) or isset($_SESSION['idAdministrateur'], $administrateur);
+}
+
 //   -Si un utilisateur n'est pas connecté
 //   -Et qu'on est pas dans la partie plateau (pour éviter de déconnecter un administrateur)
 // OU
