@@ -299,7 +299,12 @@ require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/password.php";
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/logger.class.php";
 $logger = new Logger($config['log_dir'], $config['log_level']);
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/database.class.php";
-$db = new Database($config['db_host'], $config['db_login'], $config['db_password'], $config['db_name'], $logger);
+try {
+    $db = new Database($config['db_host'], $config['db_login'], $config['db_password'], $config['db_name'], $logger);
+} catch (Exception $e) {
+    die('Connexion à la base de données impossible<br>'
+    .$e->getMessage());
+}
 
 //Description des étapes de suivi des commandes
 $descEtapes = [
