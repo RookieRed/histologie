@@ -1,5 +1,4 @@
 cfg/
-!cfg/.htaccess
 .idea/
 *.iml
 sftp-config.json
