@@ -72,3 +72,17 @@ border-bottom-right-radius: 5px;
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+#encart-nb-echantillon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+}
+
+#encart-nb-echantillon > div {
+    margin: 0 15px;
+}

@@ -13,11 +13,12 @@ if(!isset($_SESSION['commande']) || ((!isset($_POST['nbEchantillons']) || intval
     }
     exit;
 }
-if(isset($_POST['nbEchantillons']))
+if(isset($_POST['change-nb-enchantillons']) || !isset($_SESSION['commande']['nbEchantillons']))
 {
     $_SESSION['commande']['nbEchantillons'] = $_POST['nbEchantillons'];
 }
-elseif(isset($_POST['animal']))
+$nbEchantillons = $_SESSION['commande']['nbEchantillons'];
+if(!isset($_POST['change-nb-enchantillons'])  && isset($_POST['suivant']))
 {
     //Vérification du formulaire :
     //  -Champs existent
@@ -29,7 +30,6 @@ elseif(isset($_POST['animal']))
     $inclusion = false;
     $coupe = false;
     $coloration = false;
-    $nbEchantillons = $_SESSION['commande']['nbEchantillons'];
     if(!isset($_POST['animal']) || !is_array($_POST['animal']) || count($_POST['animal']) != $nbEchantillons
         || !isset($_POST['identAnimal']) || !is_array($_POST['identAnimal']) || count($_POST['identAnimal']) != $nbEchantillons
         || !isset($_POST['organe']) || !is_array($_POST['organe']) || count($_POST['organe']) != $nbEchantillons
@@ -175,7 +175,7 @@ require "inc/header.php";
                 <?php
                 }
                 ?>
-                <form action="echantillons.php" method="POST">
+                <form action="echantillons.php" method="POST" id="main">
                     <table class="table">
                         <thead>
                             <tr>
@@ -204,7 +204,7 @@ require "inc/header.php";
                             <tr class="echantillon" id="<?=($i+1)?>">
                                 <td><?=$_SESSION['commande']['numProvisoire'] . "-" . sprintf("%03d", $i+1)?></td>
                                 <td>
-                                    <select name="animal[]" class="animal" required>
+                                    <select name="animal[]" class="animal">
                                         <option value>-</option>
                                         <?php
                                         $animaux = $db->getAnimaux();
@@ -225,7 +225,7 @@ require "inc/header.php";
                                             <?php
                                         }
                                         $nomAnimalAutre = "";
-                                        $animalAutre = !$animalFound && (isset($_POST['animalAutre'][$i]) || isset($_SESSION['commande']['echantillons'][$i]['animal']));
+                                        $animalAutre = !$animalFound && $_POST['animal'][$i] == -1;
                                         if($animalAutre)
                                         {
                                             $nomAnimalAutre = $_POST['animalAutre'][$i] ?:
@@ -240,12 +240,12 @@ require "inc/header.php";
                                     <input type="text" class="animalAutre <?=!$animalAutre ? "hidden" : ""?>" name="animalAutre[]" value="<?=$nomAnimalAutre?>">
                                 </td>
                                 <td>
-                                    <input type="text" name="identAnimal[]" class="identAnimal" required
+                                    <input type="text" name="identAnimal[]" class="identAnimal"
                                     value="<?=getVarSafe($_POST['identAnimal'][$i]) ?: getVarSafe($_SESSION['commande']['echantillons'][$i]['identAnimal'])?>">
                                 </td>
                                 <td>
-                                    <select name="organe[]" class="organe" required>
-                                        <option value>-</option>
+                                    <select name="organe[]" class="organe">
+                                        <option value="-">-</option>
                                         <?php
                                         $organes = $db->getOrganes();
                                         $organeTrouve = false;
@@ -265,7 +265,7 @@ require "inc/header.php";
                                             <?php
                                         }
                                         $nomOrganeAutre = "";
-                                        $organeAutre = !$organeTrouve && (isset($_POST['organeAutre'][$i]) || isset($_SESSION['commande']['echantillons'][$i]['organe']));
+                                        $organeAutre = !$organeTrouve && $_POST['organe'][$i] == -1;
                                         if($organeAutre)
                                         {
                                             $nomOrganeAutre = getVarSafe($_POST['organeAutre'][$i]) ?:
@@ -284,7 +284,7 @@ require "inc/header.php";
                                 {
                                 ?>
                                 <td>
-                                    <select name="inclusion[]" class="inclusion" required>
+                                    <select name="inclusion[]" class="inclusion">
                                         <option value="1">Oui</option>
                                         <option value="0"
                                         <?=(getVarSafe($_POST['inclusion'][$i]) ?: getVarSafe($_SESSION['commande']['echantillons'][$i]['inclusion'])) == 0 ? "selected" : ""?>>
@@ -296,7 +296,7 @@ require "inc/header.php";
                                 }
                                 ?>
                                 <td>
-                                    <select name="coupe[]" class="coupe" required>
+                                    <select name="coupe[]" class="coupe">
                                         <option value="1">Oui</option>
                                         <option value="0"
                                         <?=(getVarSafe($_POST['coupe'][$i]) ?: getVarSafe($_SESSION['commande']['echantillons'][$i]['coupe'])) == 0 ? "selected" : ""?>>
@@ -305,7 +305,7 @@ require "inc/header.php";
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="coloration[]" class="coloration" required>
+                                    <select name="coloration[]" class="coloration">
                                         <option value="1">Oui</option>
                                         <option value="0"
                                         <?=(getVarSafe($_POST['coloration'][$i]) ?: getVarSafe($_SESSION['commande']['echantillons'][$i]['coloration'])) == 0 ? "selected" : ""?>>
@@ -333,8 +333,13 @@ require "inc/header.php";
                             ?>
                         </tbody>
                     </table>
+                    <div id="encart-nb-echantillon">
+                        <div><label for="nb-echantillons">Changer le nombre de ligne :</label></div>
+                        <div><input id="nb-echantillons" class="form-control" type="number" value="<?=$nbEchantillons?>" min="0" name="nbEchantillons"/></div>
+                        <div><input type="submit" class="btn btn-primary" name="change-nb-enchantillons" value="Changer"></div>
+                    </div>
                     <a href="commande.php?type=<?=$_SESSION['commande']['type']?>" class="btn btn-default">Précédent</a>
-                    <input type="submit" class="btn btn-primary pull-right" value="Suivant">
+                    <input type="submit" class="btn btn-primary pull-right" name="suivant" value="Suivant">
                 </form>
             </div>
         </div>
