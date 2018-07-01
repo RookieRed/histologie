@@ -157,7 +157,7 @@ require "inc/header.php";
                                         </option>
                                     </select>
                                     <br>
-                                    <input type="text" class="inclusionAutre <?=!$inclusionAutre ? "hidden" : ""?>" name="inclusionAutre[]" value="<?=$_POST['inclusionAutre'][$i]?>">
+                                    <input type="text" class="inclusionAutre <?=!$inclusionAutre ? "hidden" : ""?>" name="inclusionAutre[]" value="<?=isset($_POST['inclusionAutre'][$i])? $_POST['inclusionAutre'][$i] : ''?>">
                                 </td>
                                 <td>
                                     <div class="dropdown">

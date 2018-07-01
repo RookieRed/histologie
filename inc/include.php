@@ -295,6 +295,49 @@ function getVarSafe(&$var)
     return isset($var) ? $var : "";
 }
 
+/**
+ * Retourne la valeur à afficher dans la colonne Coupe des fiches commandes
+ */
+function getRecapCoupe($echantillon) {
+    $nbLames = count($echantillon['lames']);
+    if ($echantillon['epaisseurCoupes'] == null && $echantillon['nbCoupes'] == null && $nbLames == 0) {
+        return '/';
+    }
+    $ret = ($echantillon['epaisseurCoupes'] == null ? '' : $echantillon['epaisseurCoupes'] . 'µm/')
+        . ($echantillon['nbCoupes'] == null ? '' : $echantillon['nbCoupes'] . 'C/')
+        . ($nbLames == 0 ? '' : $nbLames . 'L/');
+    return substr($ret, 0, strlen($ret) - 1);
+}
+
+/**
+ * Retourne le numéro de commande formaté en HTML pour affichage.
+ */
+function getNumCommandeHtml($numCommande) {
+    if (preg_match('/^([CP]\d+)-(\d+)-(\d+)-(\d+)(-\d+)?$/i', $numCommande,$matches)) {
+        return $matches[1] . '-' . $matches[2] . '-' . $matches[3] . '-<b>' . $matches[4] . '</b>'
+            . (isset($matches[5]) ? $matches[5] : '');
+    }
+    return $numCommande;
+}
+
+/**
+ * Retourne le recap des coloration format HTML
+ * @param $lames
+ * @return string
+ */
+function getRecapColoration($lames) {
+    if (count($lames) == 0) {
+        return '/';
+    }
+    $ret = '<ul>';
+    foreach($lames as $lame) {
+        if($lame['nomColoration']) {
+            $ret .= '<li>'.$lame['nomColoration'].'</li>';
+        }
+    }
+    return $ret === '<ul>' ? '/' : $ret.'</ul>';
+}
+
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/password.php";
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/logger.class.php";
 $logger = new Logger($config['log_dir'], $config['log_level']);
@@ -361,7 +404,7 @@ if(isset($_SESSION['idAdministrateur']))
 function estConnecte(): bool {
     global $utilisateur;
     global $administrateur;
-    return isset($_SESSION['idAdministrateur'], $utilisateur) or isset($_SESSION['idAdministrateur'], $administrateur);
+    return isset($_SESSION['idUtilisateur'], $utilisateur) or isset($_SESSION['idAdministrateur'], $administrateur);
 }
 
 //   -Si un utilisateur n'est pas connecté

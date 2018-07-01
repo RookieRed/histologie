@@ -6,6 +6,7 @@ if(!isset($_GET['idCommande']))
     exit;
 }
 $idCommande = intval($_GET['idCommande']);
+$pourImpression = isset($_GET['pourImpression']) && $_GET['pourImpression'];
 $commande = $db->getCommandePourUtilisateur($idCommande, $_SESSION['idUtilisateur']);
 if(!isset($commande))
 {
@@ -59,42 +60,34 @@ if(!isset($commande))
                 {
                 ?>
                 <tr>
-                    <td><?=$echantillon['numEchantillon']?></td>
+                    <td><?=getNumCommandeHtml($echantillon['numEchantillon'])?></td>
                     <td><?=$echantillon['typeAnimal']?></td>
                     <td><?=$echantillon['identAnimalEchantillon']?></td>
                     <td><?=$echantillon['nomOrgane']?></td>
                     <td><?=$echantillon['nomInclusion'] == null ? "/" : $echantillon['nomInclusion']?></td>
-                    <td><?=$echantillon['epaisseurCoupes'] . "µm/" . $echantillon['nbCoupes'] . "C/" . count($echantillon['lames']) . "L"?></td>
-                    <td>
-                        <ul>
-                            <?php
-                            foreach($echantillon['lames'] as $lame)
-                            {
-                                if($lame['nomColoration'])
-                                {
-                                ?>
-                                <li>
-                                    <?=$lame['nomColoration']?>
-                                </li>
-                                <?php
-                                }
-                            }
-                            ?>
-                        </ul>
-                    </td>
+                    <td><?=getRecapCoupe($echantillon)?></td>
+                    <td><?=getRecapColoration($echantillon['lames'])?></td>
                 </tr>
                 <?php
                 }
                 ?>
             </tbody>
         </table>
+        <?php if (!$pourImpression || strlen($commande['commentaireUtilisateur']) > 0) { ?>
         <fieldset>
             <legend>
                 Commentaire utilisateur
             </legend>
+            <?php if ($pourImpression) { ?>
+            <p class="bloc-commentaire"><?=$commande['commentaireUtilisateur']?></p>
+            <?php } else { ?>
             <textarea disabled class="form-control"><?=$commande['commentaireUtilisateur']?></textarea>
+            <?php } ?>
         </fieldset>
+        <?php } ?>
         <br><br>
+        <?php if (!$pourImpression) { ?>
         <button onclick="window.print()" class="btn btn-default hidden-print" id="imprimer">Imprimer</button>
+        <?php } ?>
     </body>
 </html>

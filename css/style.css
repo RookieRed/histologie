@@ -86,3 +86,8 @@ border-bottom-right-radius: 5px;
 #encart-nb-echantillon > div {
     margin: 0 15px;
 }
+
+.bloc-commentaire {
+    padding: 0 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
