@@ -13,16 +13,25 @@ if(empty($_GET['etape']) || $_GET['etape'] < 1 || $_GET['etape'] > 5)
 }
 $etape = $_GET['etape'];
 $title = "Suivi " . ($type == "P" ? "Paraffine" : "Cryo");
+$titre = $title;
+$lignes = call_user_func($descEtapes[$etape]['methodes']['get'], $type);
 require "../inc/header.php";
 ?>
+<?php if (count($lignes) >= 10) { ?>
+<div class="down-btn-container">
+    <a href="#" onclick="scrollToBottom(event)" class="down-btn">&#9662;&#9662;</a>
+</div>
+<?php } ?>
 <div class="container">
     <div class="col-md-12">
         <div class="panel panel-primary">
             <div class="panel-heading"><?=$title?></div>
             <div class="panel-body">
                 <h3><?=$descEtapes[$etape]["nom"]?></h3>
-                <?php
-                $lignes = call_user_func($descEtapes[$etape]['methodes']['get'], $type);
+                <?php if (count($lignes) >= 10) { ?>
+                    <a href="suivi.php?type=<?=$type?>" class="btn btn-default">Précédent</a>
+                    <button class="btn btn-primary pull-right" id="validerLignes">Valider les lignes sélectionnées</button>
+                <?php }
                 if(!empty($lignes))
                 {
                 ?>

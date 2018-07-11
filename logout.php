@@ -1,5 +1,6 @@
 <?php
 session_start();
+$prefix = isset($_SESSION['idAdministrateur']) ? '/plateau' : '';
 session_destroy();
-header("Location: connexion.php");
+header("Location: $prefix/connexion.php");
 exit;

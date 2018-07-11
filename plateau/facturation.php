@@ -10,6 +10,9 @@ else {
 $titre = "Facturation";
 require "../inc/header.php";
 ?>
+<div class="down-btn-container">
+    <a href="#" onclick="scrollToBottom(event)" class="down-btn">&#9662;&#9662;</a>
+</div>
 <div class="container">
     <ul class="nav nav-tabs">
         <li role="presentation"<?=$type == "P" ? ' class="active"' : ''?>><a href="facturation.php?type=P">Para</a></li>

@@ -100,3 +100,18 @@ $(document).ready(function() {
         });
     });
 });
+
+function scrollToBottom(event) {
+    event.preventDefault();
+    if (Math.floor(window.innerHeight + window.scrollY) < document.body.offsetHeight - 1) {
+        $("html, body").animate({scrollTop: document.body.scrollHeight}, "slow");
+    }
+}
+
+$(window).on("scroll", function() {
+    if (Math.floor(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
+        $('div.down-btn-container').addClass('disabled');
+    } else {
+        $('div.down-btn-container').removeClass('disabled');
+    }
+});
