@@ -71,22 +71,23 @@ function editConfiguration($file, $name, $value)
 }
 
 /**
-* Envoie un mail d'une personne à une ou plusieurs personnes
-*
-* Le contenu du mail est défini à partir d'un modele, les occurences de $search trouvées dans ce modele seront remplacées par leur équivalent dans $replace
-*
-* @param string|array $from Expéditeur du mail. Si le paramètre est un tableau associatif, il doit être sous la forme :
-* ['name'] = "Nom du destinataire", ['mail'] = "Adresse mail du destinataire"
-* @param string|array $to Destinataire(s) du mail. Si le paramètre est un tableau associatif, il doit être sous la même forme qu'au dessus
-* Ce paramètre peut aussi être un tableau de chaines de caractères, ou un tableau de tableaux associatifs formulé comme au dessus
-* dans le cas ou il y aurait plusieurs destinataires.
-* @param string $subject Objet du mail
-* @param string $modeleMail Modèle du mail, associé à un fichier .txt (et .html) dans le fichier cfg/config.cfg
-* @param array $search Paramètre du mail devant être recherchés. Voir le fichier cfg/config.cfg pour plus d'informations
-* @param array $replace Remplacement des chaines contenues dans $serach
-*
-* @return boolean
-*/
+ * Envoie un mail d'une personne à une ou plusieurs personnes
+ *
+ * Le contenu du mail est défini à partir d'un modele, les occurences de $search trouvées dans ce modele seront remplacées par leur équivalent dans $replace
+ *
+ * @param string|array $from Expéditeur du mail. Si le paramètre est un tableau associatif, il doit être sous la forme :
+ * ['name'] = "Nom du destinataire", ['mail'] = "Adresse mail du destinataire"
+ * @param string|array $to Destinataire(s) du mail. Si le paramètre est un tableau associatif, il doit être sous la même forme qu'au dessus
+ * Ce paramètre peut aussi être un tableau de chaines de caractères, ou un tableau de tableaux associatifs formulé comme au dessus
+ * dans le cas ou il y aurait plusieurs destinataires.
+ * @param string $subject Objet du mail
+ * @param string $modeleMail Modèle du mail, associé à un fichier .txt (et .html) dans le fichier cfg/config.cfg
+ * @param array $search Paramètre du mail devant être recherchés. Voir le fichier cfg/config.cfg pour plus d'informations
+ * @param array $replace Remplacement des chaines contenues dans $serach
+ *
+ * @return boolean
+ * @throws phpmailerException
+ */
 function sendMail($from, $to, $subject, $modeleMail, $search, $replace)
 {
     global $config;

@@ -91,3 +91,21 @@ border-bottom-right-radius: 5px;
     padding: 0 10px 20px;
     border-bottom: 1px solid #e5e5e5;
 }
+
+/*
+====================== ADMINISTRATION =====================
+*/
+
+.admin div.panel-primary {
+    border-color: #df3c73 !important;
+}
+
+.admin div.panel-heading {
+    border-color: #df3c73 !important;
+    background-color: #df3c73 !important;
+}
+
+.admin .btn-primary {
+    background-color: #df3c73 !important;
+    border-color: #df3c73 !important;
+}

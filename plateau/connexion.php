@@ -19,13 +19,13 @@ else
 {
     $message = "Merci de remplir tous les champs";
 }
-$titre = "Connexion";
+$titre = "Administration";
 require "../inc/header.php";
 ?>
 <div class="container">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3 admin">
         <div class="panel panel-primary aide" data-toggle="popover" data-placement="bottom">
-            <div class="panel-heading">Connexion</div>
+            <div class="panel-heading">Connexion panel administration</div>
             <div class="panel-body">
                 <?php
                 //Si une tentative a été effectuée, mais qu'on est toujours sur l'index -> Erreur
