@@ -89,5 +89,22 @@ if(!isset($commande))
         <?php if (!$pourImpression) { ?>
         <button onclick="window.print()" class="btn btn-default hidden-print" id="imprimer">Imprimer</button>
         <?php } ?>
+
+    <!--[if IE]>
+        <p style="FONT-SIZE: 10px; WIDTH: 100%; POSITION: absolute; COLOR: #aaaaaa; TEXT-ALIGN: center; BOTTOM: 0px">Internet Explorer est un casse-tête pour les développeurs.<br>
+        Merci d'utiliser un vrai navigateur à jour (Chrome, Firefox, Edge, Opéra, Safari...)</p>
+    <![endif]-->
     </body>
+<script language="JavaScript">
+    window.onload = function() {
+        if (window.location.search.match(/&pourImpression=1/)
+            && (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/)
+            || navigator.userAgent.match(/rv:11/)) || (typeof $.browser !== "undefined" && $.browser.msie == 1))){
+            window.focus();
+            window.print();
+            window.close();
+        }
+    }
+
+</script>
 </html>
