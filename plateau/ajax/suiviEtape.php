@@ -65,7 +65,7 @@ else {
                         if(!empty($_POST['commentaires'][$i]))
                         {
                             //On échappe les potentiels caractères HTML et on ajouter des retours à la ligne HTML pour garder le formattage
-                            $commentaire = nl2br(htmlspecialchars($_POST['commentaires'][$i]));
+                            $commentaire = 'Commentaire plateau : ' . nl2br(htmlspecialchars($_POST['commentaires'][$i]));
                         }
                         sendMail("histologie-i2mc@inserm.fr", $destinataire, $configStable['objet_commande_prete'], "mail_commande_prete",
                             ["{nom}", "{prenom}", "{commentaire}", "{numCommande}"],

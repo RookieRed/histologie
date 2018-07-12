@@ -1,8 +1,8 @@
 Bonjour,
 
 Votre commande n°{numCommande} est prête, vous pouvez passer au plateau pour la récupérer.
-Commentaire du plateau :
 {commentaire}
+
 
 Bonne journée.
 Plateau Histologie
