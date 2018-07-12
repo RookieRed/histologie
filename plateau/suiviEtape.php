@@ -36,7 +36,7 @@ require "../inc/header.php";
                 {
                 ?>
                 <input type="hidden" id="etape" value="<?=$etape?>">
-                <table class="table">
+                <table class="table with-checkboxes">
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="selectionnerLignes"></th>
@@ -64,30 +64,29 @@ require "../inc/header.php";
                     </thead>
                     <tbody>
                         <?php
-
                         foreach($lignes as $ligne)
                         {
                         ?>
                         <tr data-id="<?=$ligne['id']?>">
-                            <td><input type="checkbox"></td>
+                            <td><input id="cb-<?=$ligne['id']?>" type="checkbox"></td>
                             <?php
                             foreach($keys as $key)
                             {
                             ?>
-                            <td><?=$ligne[$key]?></td>
+                                <td><label class="all-line" for="cb-<?=$ligne['id']?>"><?=$ligne[$key]?></label></td>
                             <?php
                             }
                             ?>
-                            <td><input type="text" class="datepicker" value="<?=date("d-m-Y")?>"></td>
+                            <td class="input-td"><input type="text" class="datepicker" value="<?=date("d-m-Y")?>"></td>
                             <?php
                             if($etape == 5)
                             {
                                 ?>
-                            <td><textarea placeholder="Commentaire" class="form-control"></textarea></td>
+                            <td class="input-td"><textarea placeholder="Commentaire" class="form-control"></textarea></td>
                                 <?php
                             }
                             ?>
-                            <td><input type="button" class="btn btn-default btn-sm validerLigne" value="OK"></td>
+                            <td class="input-td"><input type="button" class="btn btn-default btn-sm validerLigne" value="OK"></td>
                         </tr>
                         <?php
                         }

@@ -45,7 +45,14 @@ require "inc/header.php";
                         <label for="password">Mot de passe</label>
                         <input class="form-control" type="password" name="password" id="password" required>
                     </div>
-                    <button type="submit" class="btn btn-default">Connexion</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-default">Connexion</button>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="pull-right" href="/plateau/connexion.php">Adrministration</a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

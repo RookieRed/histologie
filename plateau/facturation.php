@@ -18,7 +18,7 @@ require "../inc/header.php";
         <li role="presentation"<?=$type == "P" ? ' class="active"' : ''?>><a href="facturation.php?type=P">Para</a></li>
         <li role="presentation"<?=$type == "C" ? ' class="active"' : ''?>><a href="facturation.php?type=C">Cryo</a></li>
     </ul>
-    <table class="table">
+    <table class="table with-checkboxes">
         <thead>
             <tr>
                 <th><input type="checkbox" id="selectionnerLignes"></th>
@@ -38,14 +38,14 @@ require "../inc/header.php";
             {
             ?>
             <tr data-id="<?=$commande['idCommande']?>">
-                <td><input type="checkbox"></td>
-                <td><?=$commande['numCommande']?></td>
-                <td><?=$commande['prenomUtilisateur'] . " " . $commande['nomUtilisateur']?></td>
-                <td><?=$commande['nomCentre'] . "-" . $commande['nomEquipe']?></td>
-                <td><?=$commande['nbIncl']?></td>
-                <td><?=$commande['lamesBlanches']?></td>
-                <td><?=$commande['lamesColores']?></td>
-                <td><?=$commande['nbColo']?></td>
+                <td><input type="checkbox" id="cb-<?=$commande['numCommande']?>"></td>
+                <td><label for="cb-<?=$commande['numCommande']?>" class="all-line"><?=$commande['numCommande']?></label></td>
+                <td><label for="cb-<?=$commande['numCommande']?>" class="all-line"><?=$commande['prenomUtilisateur'] . " " . $commande['nomUtilisateur']?></label></td>
+                <td><label for="cb-<?=$commande['numCommande']?>" class="all-line"><?=$commande['nomCentre'] . "-" . $commande['nomEquipe']?></label></td>
+                <td><label for="cb-<?=$commande['numCommande']?>" class="all-line"><?=$commande['nbIncl']?></label></td>
+                <td><label for="cb-<?=$commande['numCommande']?>" class="all-line"><?=$commande['lamesBlanches']?></label></td>
+                <td><label for="cb-<?=$commande['numCommande']?>" class="all-line"><?=$commande['lamesColores']?></label></td>
+                <td><label for="cb-<?=$commande['numCommande']?>" class="all-line"><?=$commande['nbColo']?></label></td>
             </tr>
             <?php
             }

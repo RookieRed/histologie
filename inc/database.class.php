@@ -182,9 +182,11 @@ class Database {
     //Retourne une liste de commandes à réceptionner
     public function getCommandesAReceptionner($type)
     {
-        return $this->query('SELECT idCommande id, numCommande "Commande N°" FROM Commande
-                             WHERE dateReceptionCommande IS NULL AND LEFT(numCommande, 1) = ?
-                             ORDER BY dateCommande', $type);
+        return $this->query('SELECT idCommande id, numCommande "Commande N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
+                            FROM Commande c, Utilisateur u
+                            WHERE dateReceptionCommande IS NULL AND LEFT(numCommande, 1) = ?
+                              AND c.idUtilisateur = u.idUtilisateur
+                            ORDER BY dateCommande', $type);
     }
 
     //Retourne le nombre de commandes à réceptionner
@@ -230,7 +232,7 @@ class Database {
                                          AND (l.dateColoration IS NOT NULL OR l.idColoration IS NULL)
                                          GROUP BY id, "Commande N°"', $type);
         */
-        $commandes = $this->query('SELECT DISTINCT c.idCommande id, numCommande "Commande N°"
+        $commandes = $this->query('SELECT DISTINCT c.idCommande id, numCommande "Commande N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
                                    FROM Commande c
                                    LEFT JOIN Echantillon e ON c.idCommande = e.idCommande
                                    LEFT JOIN Lame l ON e.idEchantillon = l.idEchantillon
@@ -249,7 +251,7 @@ class Database {
                                            ELSE "En cours"
                                        END
                                    ) = "En cours"
-                                   ORDER BY c.idCommande DESC');
+                                   ORDER BY c.idCommande DESC', $type);
         return $commandes;
         $commandesARetourner = [];
         foreach($commandesPretes as $commandePrete)
@@ -482,9 +484,11 @@ class Database {
     */
     public function getEchantillonsAInclure()
     {
-        return $this->query('SELECT e.idEchantillon id, e.numEchantillon "Echantillon N°" FROM Echantillon e
+        return $this->query('SELECT e.idEchantillon id, e.numEchantillon "Echantillon N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
+                             FROM Utilisateur u, Echantillon e
                              INNER JOIN Commande c ON c.idCommande = e.idCommande
                              WHERE c.dateReceptionCommande IS NOT NULL AND LEFT(c.numCommande, 1) = "P"
+                             AND u.idUtilisateur = c.idUtilisateur
                              AND e.dateInclusion IS NULL
                              AND e.idInclusion IS NOT NULL');
     }
@@ -511,9 +515,11 @@ class Database {
     //Retourne une liste d'échantillons nécessitant une coupe
     public function getEchantillonsACouper($type)
     {
-        return $this->query('SELECT e.idEchantillon id, e.numEchantillon "Echantillon N°" FROM Echantillon e
+        return $this->query('SELECT e.idEchantillon id, e.numEchantillon "Echantillon N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
+                             FROM Utilisateur u, Echantillon e
                              INNER JOIN Commande c ON c.idCommande = e.idCommande
                              WHERE c.dateReceptionCommande IS NOT NULL AND e.dateCoupe IS NULL
+                             AND c.idUtilisateur = u.idUtilisateur
                              AND e.epaisseurCoupes IS NOT NULL AND e.nbCoupes IS NOT NULL AND LEFT(c.numCommande, 1) = ?
                              AND (e.dateInclusion IS NOT NULL OR e.idInclusion IS NULL)', $type);
     }
@@ -572,11 +578,13 @@ class Database {
         dont l'inclusion est effectuée ou n'est pas à formulaire
         et dont la coloration est à faire mais pas effectuée
         */
-        return $this->query('SELECT idLame id, numLame "Lame N°", col.nomColoration Coloration FROM Lame l
+        return $this->query('SELECT idLame id, numLame "Lame N°", col.nomColoration Coloration, CONCAT(u.prenomUtilisateur,\' \',u.nomUtilisateur) "Utilisateur"
+                             FROM Utilisateur u, Lame l
                              INNER JOIN Echantillon e ON e.idEchantillon = l.idEchantillon
                              INNER JOIN Commande c ON c.idCommande = e.idCommande
                              INNER JOIN Coloration col ON col.idColoration = l.idColoration
                              WHERE c.dateReceptionCommande IS NOT NULL AND LEFT(c.numCommande, 1) = ?
+                             AND c.idUtilisateur = u.idUtilisateur
                              AND (e.dateCoupe IS NOT NULL || (e.epaisseurCoupes IS NULL AND e.nbCoupes IS NULL))
                              AND (e.dateInclusion IS NOT NULL OR e.idInclusion IS NULL)
                              AND l.idColoration IS NOT NULL AND l.dateColoration IS NULL', $type);
