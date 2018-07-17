@@ -14,6 +14,15 @@ require "../inc/header.php";
     <a href="#" onclick="scrollToBottom(event)" class="down-btn">&#9662;&#9662;</a>
 </div>
 <div class="container">
+    <div class="row margin-height">
+        <div class="col-md-6 text-center">
+            <a href="index.php" class="btn btn-default pull-left">Précédent</a>
+            <a class="btn btn-default exporterFactures" href="exporterFactures.php?">Extraire au format CSV</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <button class="btn btn-primary validerFacturation">Valider la facturation</button>
+        </div>
+    </div>
     <ul class="nav nav-tabs">
         <li role="presentation"<?=$type == "P" ? ' class="active"' : ''?>><a href="facturation.php?type=P">Para</a></li>
         <li role="presentation"<?=$type == "C" ? ' class="active"' : ''?>><a href="facturation.php?type=C">Cryo</a></li>
@@ -52,13 +61,15 @@ require "../inc/header.php";
             ?>
         </tbody>
     </table>
-    <div class="col-md-6 text-center">
-        <a class="btn btn-default" href="exporterFactures.php?" id="exporterFactures">Extraire au format CSV</a>
+    <div class="row margin-height">
+        <div class="col-md-6 text-center">
+            <a href="index.php" class="btn btn-default pull-left">Précédent</a>
+            <a class="btn btn-default exporterFactures" href="exporterFactures.php?">Extraire au format CSV</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <button class="btn btn-primary validerFacturation">Valider la facturation</button>
+        </div>
     </div>
-    <div class="col-md-6 text-center">
-        <button class="btn btn-primary" id="validerFacturation">Valider la facturation</button>
-    </div>
-    <a href="index.php" class="btn btn-default">Précédent</a>
 </div>
 <?php
 $scripts = ["facturation.js"];

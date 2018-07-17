@@ -241,3 +241,7 @@ a.down-btn:hover:after {
 .disabled a.down-btn:after {
     display: none;
 }
+
+div.margin-height {
+    margin: 10px 0;
+}

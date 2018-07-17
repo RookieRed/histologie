@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#validerFacturation").click(function() {
+    $("button.validerFacturation").click(function() {
         var idsCommandes = [];
         $("input[type='checkbox']:checked").each(function() {
             idsCommandes.push($(this).closest("tr").data("id"));
@@ -35,6 +35,6 @@ $(document).ready(function() {
             args += "idsCommandes[]=" + $(this).closest("tr").data("id") + "&";
         });
         console.log(args);
-        $("#exporterFactures").attr("href", "exporterFactures.php?" + args);
+        $("a.exporterFactures").attr("href", "exporterFactures.php?" + args);
     });
 });
