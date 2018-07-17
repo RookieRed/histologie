@@ -82,7 +82,7 @@ require "../inc/header.php";
                             if($etape == 5)
                             {
                                 ?>
-                            <td class="input-td"><textarea placeholder="Commentaire" class="form-control"></textarea></td>
+                            <td class="input-td"><textarea placeholder="Commentaire" maxlength="1000" class="form-control"></textarea></td>
                                 <?php
                             }
                             ?>

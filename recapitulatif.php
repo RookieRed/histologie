@@ -93,7 +93,7 @@ require "inc/header.php";
                 <form method="POST" action="enregistrerCommande.php">
                     <div class="form-group">
                         <label for="commentaireUtilisateur">Commentaires :</label>
-                        <textarea class="form-control" id="commentaireUtilisateur" name="commentaireUtilisateur"></textarea>
+                        <textarea maxlength="1000" class="form-control" id="commentaireUtilisateur" name="commentaireUtilisateur"></textarea>
                     </div>
                     <input type="submit" class="btn btn-primary pull-right">
                 </form>
