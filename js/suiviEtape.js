@@ -53,7 +53,7 @@ $(document).ready(function() {
         $("input[type='checkbox']").prop("checked", $(this).is(":checked"));
     });
 
-    $("#validerLignes").click(function() {
+    $("button.validerLignes").click(function() {
         var etape = $("#etape").val();
         var lignesIds = [];
         var dates = [];

@@ -30,7 +30,7 @@ require "../inc/header.php";
                 <h3><?=$descEtapes[$etape]["nom"]?></h3>
                 <?php if (count($lignes) >= 10) { ?>
                     <a href="suivi.php?type=<?=$type?>" class="btn btn-default">Précédent</a>
-                    <button class="btn btn-primary pull-right" id="validerLignes">Valider les lignes sélectionnées</button>
+                    <button class="btn btn-primary pull-right validerLignes">Valider les lignes sélectionnées</button>
                 <?php }
                 if(!empty($lignes))
                 {
@@ -97,7 +97,7 @@ require "../inc/header.php";
                 }
                 ?>
                 <a href="suivi.php?type=<?=$type?>" class="btn btn-default">Précédent</a>
-                <button class="btn btn-primary pull-right" id="validerLignes">Valider les lignes sélectionnées</button>
+                <button class="btn btn-primary pull-right validerLignes">Valider les lignes sélectionnées</button>
             </div>
         </div>
     </div>
