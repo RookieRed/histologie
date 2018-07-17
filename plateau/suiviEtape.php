@@ -73,7 +73,9 @@ require "../inc/header.php";
                             foreach($keys as $key)
                             {
                             ?>
-                                <td><label class="all-line" for="cb-<?=$ligne['id']?>"><?=$ligne[$key]?></label></td>
+                                <td><label class="all-line" for="cb-<?=$ligne['id']?>">
+                                        <?=($key == "Echantillon N°") ? getNumCommandeHtml($ligne[$key]) : $ligne[$key] ?>
+                                    </label></td>
                             <?php
                             }
                             ?>
@@ -82,7 +84,7 @@ require "../inc/header.php";
                             if($etape == 5)
                             {
                                 ?>
-                            <td class="input-td"><textarea placeholder="Commentaire" maxlength="1000" class="form-control"></textarea></td>
+                            <td class="input-td"><textarea placeholder="Commentaire" maxlength="2000" class="form-control"></textarea></td>
                                 <?php
                             }
                             ?>
