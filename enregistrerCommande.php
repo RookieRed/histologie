@@ -47,6 +47,6 @@ require "inc/header.php";
 </div>
 <iframe src="/ficheCommande.php?idCommande=<?=$idCommande?>&pourImpression=1" style="display:none;" name="impressionCommande"></iframe>
 <?php
-//unset($_SESSION['commande']);
+unset($_SESSION['commande']);
 require "inc/footer.php";
 ?>
