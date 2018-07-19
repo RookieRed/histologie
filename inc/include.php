@@ -1,6 +1,6 @@
 <?php
 session_start();
-$path = '';
+$path = "/histo";
 /**
 * Lis un fichier de configuration
 *
