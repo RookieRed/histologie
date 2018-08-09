@@ -402,7 +402,7 @@ if(isset($_SESSION['idAdministrateur']))
     $administrateur = $db->getAdministrateur($_SESSION['idAdministrateur']);
 }
 
-function estConnecte(): bool {
+function estConnecte() {
     global $utilisateur;
     global $administrateur;
     return isset($_SESSION['idUtilisateur'], $utilisateur) or isset($_SESSION['idAdministrateur'], $administrateur);
