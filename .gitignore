@@ -1,4 +1,5 @@
-cfg/
+cfg/config.cfg
+cfg/config.stable.cfg
 .idea/
 *.iml
 sftp-config.json

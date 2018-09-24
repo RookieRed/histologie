@@ -15,6 +15,9 @@ class Database {
     public function __construct($host, $login, $password, $dbName, Logger $logger)
     {
         $this->_logger = $logger;
+        $a = "";
+        exec('whoami', $a);
+        var_dump($a);
         try {
             //Options de connexion
             $options = [
