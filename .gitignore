@@ -1,6 +1,6 @@
-cfg/config.cfg
-cfg/config.stable.cfg
+config/config.cfg
 .idea/
 *.iml
 sftp-config.json
 logs/
+.env
