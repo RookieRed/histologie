@@ -1,18 +1,21 @@
 # Histologie
 
-## Configuration
-
-Change the environment values in the `cfg/config.cfg` and `cfg/config.stable.cfg` files.
-
-## Installation
-
 This application works with : 
 
- * **PHP** version 5 or higher
- * **MySQL** version 5 or higher
+ * **PHP** version 5.6 or higher
+ * **MySQL** version 5.7 or higher
  * **Apache** or **Nginx**
 
-### Install Docker
+## Configuration
+
+There are two files to change for application's configuration :
+
+ * **`/.env`** is for Docker environment variables to connect MySQL database.
+ * **`/config/config.cfg`** for the rest of config variables needed.
+
+The models for these files are available with a `.dist` extension. Simply the extension and change the values.
+
+## Get Docker
 
 If you already have Docker installed, skip to the next step.
 
@@ -31,18 +34,20 @@ To check if installation is fine run :
 docker-compose --version
 ```
 
-### Build 
+## Installation 
 
-To build the project execute the command from project's root :
+### PHP service
+
+This part is important to setup your PHP environment. First you'll need to build the image, then you'll have to create
+the logs' folder from the container itself.
+
+To build the php service execute the command from project's root :
 
 ```bash
 docker-compose build
 ```
 
-### Logs directory
-
-This command will build the PHP image. Then you need to execute the following command to create the logs' folder with
-the correct rights :
+Then you need to execute the following command to create the logs' folder with the correct rights :
 
 ```bash
 docker-compose build
@@ -53,10 +58,27 @@ docker-compose run php /bin/bash -c "cd /web; \
 
 ### Run the app
 
-If evrything is OK you can now run your app :
+Before running the application,you must ensure that the **HTTP and/or HTTPS default ports are available**.
+Ensure that you don't have an Apache or a Nginx service already using 80 and/or 443 ports.
+If everything is OK you can now run your app :
 
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
-To test, type the address of your application
+To test, simply go to the application URL.
+
+### Setup database
+
+To create the database scheme execute the following command **while containers are running** :
+
+```bash
+docker-compose exec mysql sh -c 'mysql -u "$MYSQL_USER" \
+        --database="$MYSQL_DATABASE" \
+        --password="$MYSQL_PASSWORD" < /web/bdd/empty-scheme.sql'
+```
+
+This will create the empty scheme with a default admin account with the following credentials :
+
+ * **username** : `admin`
+ * **password** : `admin`
