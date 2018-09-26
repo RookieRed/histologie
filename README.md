@@ -13,7 +13,8 @@ There are two files to change for application's configuration :
  * **`/.env`** is for Docker environment variables to connect MySQL database.
  * **`/config/config.cfg`** for the rest of config variables needed.
 
-The models for these files are available with a `.dist` extension. Simply the extension and change the values.
+The models for these files are available with a `.dist` extension. Simply remove the extension and change 
+the example values with yours.
 
 ## Get Docker
 
@@ -25,7 +26,8 @@ This application is dockerized, so you don't need to install PHP MySQL nor Apach
 Run the following command from project's root:
 
 ```bash
-./docker/install-docker.sh
+sudo chmod +x docker/install-docker.sh
+docker/install-docker.sh
 ```
 
 To check if installation is fine run :
@@ -38,7 +40,7 @@ docker-compose --version
 
 ### PHP service
 
-This part is important to setup your PHP environment. First you'll need to build the image, then you'll have to create
+This part is important to setup your PHP environment. First you'll need to build the Docker image, then you'll have to create
 the logs' folder from the container itself.
 
 To build the php service execute the command from project's root :
@@ -50,7 +52,6 @@ docker-compose build
 Then you need to execute the following command to create the logs' folder with the correct rights :
 
 ```bash
-docker-compose build
 docker-compose run php /bin/bash -c "cd /web; \
                 mkdir logs; \
                 chown www-data:www-data logs;"
@@ -63,6 +64,7 @@ Ensure that you don't have an Apache or a Nginx service already using 80 and/or 
 If everything is OK you can now run your app :
 
 ```bash
+docker-compose down
 docker-compose up -d
 ```
 
