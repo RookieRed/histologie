@@ -417,8 +417,7 @@ function estConnecte() {
 // -Si on est pas sur la page de connexion (pour éviter une redirection infinie)
 if(((!isset($utilisateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") === false)
         || (!isset($administrateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") !== false))
-    && strpos($_SERVER['SCRIPT_FILENAME'], "connexion.php") === false
-    && strpos($_SERVER['SCRIPT_FILENAME'], "creerAdmin.php") === false)
+    && strpos($_SERVER['SCRIPT_FILENAME'], "connexion.php") === false)
 {
     header("Location: connexion.php");
     exit;
