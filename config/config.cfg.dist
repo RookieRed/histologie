@@ -1,0 +1,41 @@
+#URL de l'application, utilisée lors des envois de mail
+url http://10.31.176.216
+
+# Valeurs possibles pour log_level : DEBUG, INFO, WARNING, ERROR
+# Valeur conseillée : production : INFO, développement : DEBUG
+log_level DEBUG
+
+# Informations de connexion SMTP
+smtp_host host
+smtp_port 25
+smtp_username histologie@inserm.fr
+smtp_password mdp_ici
+smtp_secure tls
+
+# Définit si l'adresse mail de l'accompagnant est obligatoire pour formuler une demande
+# Paramètrable dans l'administration
+accompagnant_obligatoire 0
+
+# Informations de connexion du dictionnaire LDAP
+ldap_url ldaps://ldap1.inserm.fr
+ldap_url ldaps://ldap2.inserm.fr
+ldap_url ldaps://ldap3.inserm.fr
+ldap_port 636
+ldap_dn_users ou=users,dc=inserm.fr,dc=local
+
+# Il doit au moins exister un fichier .txt par mail, et, optionnellement, un fichier .html du même nom.
+# Le dossier dans lequel sont contenus les mails est à paramètrer dans le fichier config.cfg
+# Dans les mails, il est possible d'utiliser les expressions suiventes, qui seront remplacées par des données :
+# {prenom} :        Prénom du demandeur
+# {nom} :           Nom du demandeur
+# {accompagnant} :  Adresse mail de l'accompagnant du demandeur
+# {date} :          Date demandée
+# {creneau} :       Créneau demandé
+# {salle} :         Salle demandée
+# {motif} :         Motif de la demande
+# {prenomr} :       Prénom du responsable (Disponible uniquement lors des refus/acceptations)
+# {nomr} :          Nom du responsable (Disponible uniquement lors des refus/acceptations)
+# {url} :           URL de l'application (paramètrable dans config.cfg)
+mail_commande_prete commande_prete
+
+objet_commande_prete Votre commande est prête

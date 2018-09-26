@@ -1,5 +1,6 @@
-<?php session_start();
-$path = "";
+<?php
+session_start();
+$path = '';
 /**
 * Lis un fichier de configuration
 *
@@ -7,7 +8,7 @@ $path = "";
 *
 * @return array Tableau associatif
 */
-function loadConfiguration($file)
+function loadConfiguration($file, $isEnv = false)
 {
     $config = [];
     $content = file_get_contents($file);
@@ -19,7 +20,7 @@ function loadConfiguration($file)
         //Si la ligne fait plus de 2 caractères de long et ne commence pas par "#" (caractère de commentaire)
         if(strlen($ligne) > 2 && $ligne[0] != "#")
         {
-            $posEspace = strpos($ligne, " ");
+            $posEspace = strpos($ligne, $isEnv ? '=' : ' ');
             $nom = trim(substr($ligne, 0, $posEspace));
             $valeur = trim(substr($ligne, $posEspace+1));
             //Si le paramètre existe déjà, on le stocke sous forme de tableau
@@ -46,8 +47,8 @@ function loadConfiguration($file)
     return $config;
 }
 
-$config = loadConfiguration($_SERVER['DOCUMENT_ROOT'] . $path . "/cfg/config.cfg");
-$configStable = loadConfiguration($_SERVER['DOCUMENT_ROOT'] . $path . "/cfg/config.stable.cfg");
+$config = loadConfiguration($_SERVER['DOCUMENT_ROOT'] . $path . "/config/config.cfg");
+$mysqlConfig = loadConfiguration($_SERVER['DOCUMENT_ROOT'] . $path . "/.env", true);
 
 
 /**
@@ -91,23 +92,19 @@ function editConfiguration($file, $name, $value)
 function sendMail($from, $to, $subject, $modeleMail, $search, $replace)
 {
     global $config;
-    global $configStable;
     global $logger;
     global $path;
 
     $logger->log("Mail", "DEBUG", 'Trying to send mail ' . $modeleMail . ' from ' . (is_array($from) ? $from['mail'] : $from) . ' to ' . print_r($to, true) . '.');
     //Récupération du dossier dans lequel trouver les modèles depuis la configuration
-    $directory = $config['mails_dir'];
-    //Ajout du "/" à la fin du nom du dossier si il n'est pas présent
-    if(substr($directory, -1) != "/")
-        $directory .= "/";
-    if(file_exists($directory . $configStable[$modeleMail] . ".txt"))
+    $directory = $_SERVER['DOCUMENT_ROOT'] . '/plateau/mails/';
+    if(file_exists($directory . $config[$modeleMail] . ".txt"))
     {
-        $bodyText = file_get_contents($directory . $configStable[$modeleMail] . ".txt");
+        $bodyText = file_get_contents($directory . $config[$modeleMail] . ".txt");
         //Le mail au format HTML est facultatif, si il n'existe pas on utilise celui au format texte
-        if(file_exists($directory . $configStable[$modeleMail] . ".html"))
+        if(file_exists($directory . $config[$modeleMail] . ".html"))
         {
-            $bodyHTML = file_get_contents($directory . $configStable[$modeleMail] . ".html");
+            $bodyHTML = file_get_contents($directory . $config[$modeleMail] . ".html");
         }
         else {
             $bodyHTML = $bodyText;
@@ -119,7 +116,7 @@ function sendMail($from, $to, $subject, $modeleMail, $search, $replace)
         $subject = str_replace($search, $replace, $subject);
     }
     else {
-        $logger->log("Mail", "ERROR", "Fichier de mail \"" . $directory . $configStable[$modeleMail] . ".txt\" introuvable!");
+        $logger->log("Mail", "ERROR", "Fichier de mail \"" . $directory . $config[$modeleMail] . ".txt\" introuvable!");
     }
 
 
@@ -199,7 +196,7 @@ function sendMail($from, $to, $subject, $modeleMail, $search, $replace)
 */
 function connectLDAP($username, $password)
 {
-    global $configStable;
+    global $config;
     //La connexion LDAP se fait à partir de l'identifiant et non de l'adresse mail complète
     if(strpos($username, "@") !== false)
     {
@@ -208,16 +205,16 @@ function connectLDAP($username, $password)
     $i = 0;
     $erreurServeur = false;
     do {
-        if(!is_array($configStable['ldap_url']) && $erreurServeur == true)
+        if(!is_array($config['ldap_url']) && $erreurServeur == true)
         {
             throw new ErrorException("Le serveur LDAP est inaccessible");
         }
-        if(!is_array($configStable['ldap_url']))
+        if(!is_array($config['ldap_url']))
         {
-            $ldap = ldap_connect($configStable['ldap_url'], $configStable['ldap_port']);
+            $ldap = ldap_connect($config['ldap_url'], $config['ldap_port']);
         }
-        elseif(isset($configStable['ldap_url'][$i])) {
-            $ldap = ldap_connect($configStable['ldap_url'][$i], $configStable['ldap_port']);
+        elseif(isset($config['ldap_url'][$i])) {
+            $ldap = ldap_connect($config['ldap_url'][$i], $config['ldap_port']);
         }
         else {
             throw new ErrorException("Le serveur LDAP est inaccessible");
@@ -234,7 +231,7 @@ function connectLDAP($username, $password)
         });
         $erreurServeur = false;
         try {
-            $bind = ldap_bind($ldap, "uid=" . $username . ",".$configStable['ldap_dn_users'], $password);
+            $bind = ldap_bind($ldap, "uid=" . $username . ",".$config['ldap_dn_users'], $password);
         }
         catch(ErrorException $err)
         {
@@ -248,7 +245,7 @@ function connectLDAP($username, $password)
     if(!$bind)
         return false;
     //Recherche des champs mail, sn (nom) et givenName (prénom) de l'utilisateur dans le dictionnaire
-    $recherche = ldap_search($ldap, $configStable['ldap_dn_users'], "(uid=" . $username . ")", ["mail", "sn", "givenName", "ou"]);
+    $recherche = ldap_search($ldap, $config['ldap_dn_users'], "(uid=" . $username . ")", ["mail", "sn", "givenName", "ou"]);
     //Chargement du premier résultat (il est censé n'y en avoir qu'un seul)
     $entry = ldap_first_entry($ldap, $recherche);
     $mail = ldap_get_values($ldap, $entry, "mail");
@@ -339,15 +336,19 @@ function getRecapColoration($lames) {
     return $ret === '<ul>' ? '/' : $ret.'</ul>';
 }
 
-require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/password.php";
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/logger.class.php";
-$logger = new Logger($config['log_dir'], $config['log_level']);
+$logger = new Logger($config['log_level']);
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/database.class.php";
 try {
-    $db = new Database($config['db_host'], $config['db_login'], $config['db_password'], $config['db_name'], $logger);
-} catch (Exception $e) {
-    die('Connexion à la base de données impossible<br>'
-    .$e->getMessage());
+    $db = new Database(
+        $mysqlConfig['MYSQL_HOSTNAME'],
+        $mysqlConfig['MYSQL_USER'],
+        $mysqlConfig['MYSQL_PASSWORD'],
+        $mysqlConfig['MYSQL_DATABASE'],
+        $logger
+    );
+} catch (PDOException $e) {
+    die('Connexion à la base de données impossible<br>'.$e->getMessage());
 }
 
 //Description des étapes de suivi des commandes
@@ -402,7 +403,7 @@ if(isset($_SESSION['idAdministrateur']))
     $administrateur = $db->getAdministrateur($_SESSION['idAdministrateur']);
 }
 
-function estConnecte(): bool {
+function estConnecte() {
     global $utilisateur;
     global $administrateur;
     return isset($_SESSION['idUtilisateur'], $utilisateur) or isset($_SESSION['idAdministrateur'], $administrateur);
@@ -414,9 +415,10 @@ function estConnecte(): bool {
 //   -Si un administrateur n'est pas connecté
 //   -Et qu'on est dans la partie plateau
 // -Si on est pas sur la page de connexion (pour éviter une redirection infinie)
-if(((!isset($utilisateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") === false) ||
-    (!isset($administrateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") !== false)) &&
-    strpos($_SERVER['SCRIPT_FILENAME'], "connexion.php") === false)
+if(((!isset($utilisateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") === false)
+        || (!isset($administrateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") !== false))
+    && strpos($_SERVER['SCRIPT_FILENAME'], "connexion.php") === false
+    && strpos($_SERVER['SCRIPT_FILENAME'], "creerAdmin.php") === false)
 {
     header("Location: connexion.php");
     exit;

@@ -4,14 +4,16 @@ class Database {
     private $_logger;
     private $_lastNumRows;
 
-   /**
-    * Effectue la connexion à la base de données
-    *
-    * @param string $host Adresse du serveur mysql
-    * @param string $login Nom de l'utilisateur à connecter
-    * @param string $password Mot de passe
-    * @param Logger $logger
-    */
+    /**
+     * Effectue la connexion à la base de données
+     *
+     * @param string $host Adresse du serveur mysql
+     * @param string $login Nom de l'utilisateur à connecter
+     * @param string $password Mot de passe
+     * @param $dbName
+     * @param Logger $logger
+     * @throws Exception
+     */
     public function __construct($host, $login, $password, $dbName, Logger $logger)
     {
         $this->_logger = $logger;
