@@ -338,10 +338,5 @@ ALTER TABLE `Equipe`
 ALTER TABLE `Utilisateur`
   ADD CONSTRAINT `FK_Utilisateur_idEquipe` FOREIGN KEY (`idEquipe`) REFERENCES `Equipe` (`idEquipe`);
 
-
--------------------------------
--- Ajout compte administrateur
---
-
-INSERT INTO `Administrateur`
-VALUES (1, 'admin', '$2y$10$1bVs.VS9Mt/AG/naI4soAu5o.oegB.LHR3i3a0Zx8w1JZHQ7uBOWy');
+INSERT INTO `Administrateur` (`nomAdmin`, `passAdmin`)
+  VALUES ('admin', '$2y$10$Y6Du4GoI1g/Cfm5u99OdXu9634kHR/iO0ceJapY1dTjnlAMXuvqN2');

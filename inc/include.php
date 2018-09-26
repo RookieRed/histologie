@@ -1,5 +1,6 @@
-<?php session_start();
-$path = "";
+<?php
+session_start();
+$path = '';
 /**
 * Lis un fichier de configuration
 *
@@ -96,10 +97,7 @@ function sendMail($from, $to, $subject, $modeleMail, $search, $replace)
 
     $logger->log("Mail", "DEBUG", 'Trying to send mail ' . $modeleMail . ' from ' . (is_array($from) ? $from['mail'] : $from) . ' to ' . print_r($to, true) . '.');
     //Récupération du dossier dans lequel trouver les modèles depuis la configuration
-    $directory = $config['mails_dir'];
-    //Ajout du "/" à la fin du nom du dossier si il n'est pas présent
-    if(substr($directory, -1) != "/")
-        $directory .= "/";
+    $directory = $_SERVER['DOCUMENT_ROOT'] . '/plateau/mails/';
     if(file_exists($directory . $config[$modeleMail] . ".txt"))
     {
         $bodyText = file_get_contents($directory . $config[$modeleMail] . ".txt");
@@ -338,15 +336,19 @@ function getRecapColoration($lames) {
     return $ret === '<ul>' ? '/' : $ret.'</ul>';
 }
 
-require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/password.php";
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/logger.class.php";
-$logger = new Logger($config['log_dir'], $config['log_level']);
+$logger = new Logger($config['log_level']);
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/database.class.php";
 try {
-    $db = new Database($mysqlConfig['MYSQL_HOST'], $mysqlConfig['MYSQL_USER'], $mysqlConfig['MYSQL_PASSWORD'], $mysqlConfig['MYSQL_DATABASE'], $logger);
-} catch (Exception $e) {
-    die('Connexion à la base de données impossible<br>'
-    .$e->getMessage());
+    $db = new Database(
+        $mysqlConfig['MYSQL_HOSTNAME'],
+        $mysqlConfig['MYSQL_USER'],
+        $mysqlConfig['MYSQL_PASSWORD'],
+        $mysqlConfig['MYSQL_DATABASE'],
+        $logger
+    );
+} catch (PDOException $e) {
+    die('Connexion à la base de données impossible<br>'.$e->getMessage());
 }
 
 //Description des étapes de suivi des commandes
@@ -413,9 +415,10 @@ function estConnecte() {
 //   -Si un administrateur n'est pas connecté
 //   -Et qu'on est dans la partie plateau
 // -Si on est pas sur la page de connexion (pour éviter une redirection infinie)
-if(((!isset($utilisateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") === false) ||
-    (!isset($administrateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") !== false)) &&
-    strpos($_SERVER['SCRIPT_FILENAME'], "connexion.php") === false)
+if(((!isset($utilisateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") === false)
+        || (!isset($administrateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") !== false))
+    && strpos($_SERVER['SCRIPT_FILENAME'], "connexion.php") === false
+    && strpos($_SERVER['SCRIPT_FILENAME'], "creerAdmin.php") === false)
 {
     header("Location: connexion.php");
     exit;

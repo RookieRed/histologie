@@ -23,6 +23,8 @@ services:
 
 
   mysql:
+    container_name: ${MYSQL_HOSTNAME}
+    hostname: ${MYSQL_HOSTNAME}
     image: mysql:5.7.23
     command: --default-authentication-plugin=mysql_native_password
     volumes:

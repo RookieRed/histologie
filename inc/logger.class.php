@@ -1,6 +1,8 @@
 <?php
 class Logger
 {
+    const LOG_DIR = '/logs/';
+
     private $_fileName;
     private $_logLevel;
     private $_levels = ['DEBUG' => 0, 'INFO' => 1, 'WARNING' => 2, 'ERROR' => 3];
@@ -8,13 +10,11 @@ class Logger
    /**
     * Instancie un nouveau logger dans un répertoire et avec un niveau de log précis
     *
-    * @param string $directory
     * @param string $logLevel
     */
-    public function __construct($directory, $logLevel)
+    public function __construct($logLevel)
     {
-        if(substr($directory, -1) != "/")
-            $directory .= "/";
+        $directory = $_SERVER['DOCUMENT_ROOT']. self::LOG_DIR;
         if (!is_dir($directory))
         {
             mkdir($directory, 0755, true);

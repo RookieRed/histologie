@@ -82,3 +82,6 @@ This will create the empty scheme with a default admin account with the followin
 
  * **username** : `admin`
  * **password** : `admin`
+
+I strongly advice you to change those credentials, or to create your own admin account before deleting this one,
+when you first logged into the application.
