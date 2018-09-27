@@ -213,27 +213,6 @@ class Database {
     //Retourne une liste de commandes prêtes à être renvoyées
     public function getCommandesARenvoyer($type)
     {
-        /*
-        $commandesTotal = $this->query('SELECT c.idCommande id, c.numCommande "Commande N°",
-                                        COUNT(DISTINCT l.idLame) nbLames, COUNT(DISTINCT e.idEchantillon) nbEchantillons
-                                        FROM Commande c
-                                        LEFT JOIN Echantillon e ON e.idCommande = c.idCommande
-                                        LEFT JOIN Lame l ON e.idEchantillon = l.idEchantillon
-                                        WHERE c.dateRetourCommande IS NULL AND LEFT(c.numCommande, 1) = ?
-                                        AND c.dateReceptionCommande IS NOT NULL
-                                        GROUP BY id, "Commande N°"', $type);
-        $commandesPretes = $this->query('SELECT c.idCommande id, c.numCommande "Commande N°",
-                                         COUNT(DISTINCT l.idLame) nbLames, COUNT(DISTINCT e.idEchantillon) nbEchantillons
-                                         FROM Commande c
-                                         LEFT JOIN Echantillon e ON e.idCommande = c.idCommande
-                                         LEFT JOIN Lame l ON e.idEchantillon = l.idEchantillon
-                                         WHERE c.dateRetourCommande IS NULL AND LEFT(c.numCommande, 1) = ?
-                                         AND c.dateReceptionCommande IS NOT NULL
-                                         AND (e.dateInclusion IS NOT NULL OR e.idInclusion IS NULL)
-                                         AND (e.dateCoupe IS NOT NULL OR (e.epaisseurCoupes IS NULL AND e.nbCoupes IS NULL))
-                                         AND (l.dateColoration IS NOT NULL OR l.idColoration IS NULL)
-                                         GROUP BY id, "Commande N°"', $type);
-        */
         $commandes = $this->query('SELECT DISTINCT c.idCommande id, numCommande "Commande N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
                                    FROM Commande c
                                    LEFT JOIN Echantillon e ON c.idCommande = e.idCommande
@@ -255,25 +234,15 @@ class Database {
                                    ) = "En cours"
                                    ORDER BY c.idCommande DESC', $type);
         return $commandes;
-        $commandesARetourner = [];
-        foreach($commandesPretes as $commandePrete)
-        {
-            foreach($commandesTotal as $commandeTotal)
-            {
-                if($commandeTotal === $commandePrete)
-                {
-                    $commandesARetourner[] = $commandePrete;
-                }
-            }
-        }
-
-        return $commandesARetourner;
     }
 
     //Retourne le nombre de commandes prêtes à être renvoyées
     public function getNbCommandesARenvoyer($type)
     {
-        return count($this->getCommandesARenvoyer($type));
+        $commandesARenvoyer = $this->getCommandesARenvoyer($type);
+        if ($commandesARenvoyer == null)
+            return 0;
+        return count($commandesARenvoyer);
     }
 
     //Enregistre qu'une commande a bien été renvoyée

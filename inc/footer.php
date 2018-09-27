@@ -1,5 +1,5 @@
 <footer>
-    Programmation : Hugo Martinez ft Rookie<span style="color:red;">Red</span> - Chef de projet : Jean-Jérôme Soueix - 2017
+    &copy; <?=date('Y')?> Hugo Martinez &amp; Rookie<span style="color:red;">Red</span> - Chef de projet : Jean-Jérôme Soueix
 </footer>
 <script src="<?=$path?>/js/jquery-3.2.0.min.js"></script>
 <script src="<?=$path?>/js/bootstrap.min.js"></script>
