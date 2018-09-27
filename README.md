@@ -52,9 +52,8 @@ docker-compose build
 Then you need to execute the following command to create the logs' folder with the correct rights :
 
 ```bash
-docker-compose run php /bin/bash -c "cd /web; \
-                mkdir logs; \
-                chown www-data:www-data logs;"
+docker-compose run php /bin/bash -c "mkdir /web/logs /web/commande/pdf; \
+                chown www-data:www-data /web/logs /web/commande/pdf;"
 ```
 
 ### Run the app

@@ -5,3 +5,4 @@ sftp-config.json
 logs/
 .env
 /vendor/
+commande/pdf/
