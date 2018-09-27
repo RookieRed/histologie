@@ -12,7 +12,7 @@ require "../inc/header.php";
     </div>
     <br>
     <br>
-    <div class="row">
+    <div class="row centered-content">
         <div class="col-md-4">
             <div class="panel panel-primary" data-ressource="animal">
                 <div class="panel-heading">
@@ -115,6 +115,8 @@ require "../inc/header.php";
                 </table>
             </div>
         </div>
+    </div>
+    <div class="row centered-content">
         <div class="col-md-4">
             <div class="panel panel-primary" data-ressource="organe">
                 <div class="panel-heading">
@@ -122,23 +124,23 @@ require "../inc/header.php";
                 </div>
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>
-                                Nom
-                            </th>
-                            <th>
-                                Modifier
-                            </th>
-                            <th>
-                                Supprimer
-                            </th>
-                        </tr>
+                    <tr>
+                        <th>
+                            Nom
+                        </th>
+                        <th>
+                            Modifier
+                        </th>
+                        <th>
+                            Supprimer
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        $organes = $db->getOrganes();
-                        foreach($organes as $organe)
-                        {
+                    <?php
+                    $organes = $db->getOrganes();
+                    foreach($organes as $organe)
+                    {
                         ?>
                         <tr data-id="<?=$organe['idOrgane']?>">
                             <td>
@@ -152,22 +154,20 @@ require "../inc/header.php";
                             </td>
                         </tr>
                         <?php
-                        }
-                        ?>
-                        <tr>
-                            <td colspan="2">
-                                <input type="text" class="form-control" >
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success ajouter">Ajouter</button>
-                            </td>
-                        </tr>
+                    }
+                    ?>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" class="form-control" >
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success ajouter">Ajouter</button>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-4">
             <div class="panel panel-primary" data-ressource="coloration">
                 <div class="panel-heading">
