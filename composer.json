@@ -1,0 +1,27 @@
+{
+    "name": "rookiered/histologie",
+    "version": "1.1.0",
+    "description": "Projet applicaiton web pour le plateau histologie Inserm",
+    "type": "project",
+    "require": {
+        "php": ">=5.6",
+        "spipu/html2pdf": "5.2.0"
+    },
+    "authors": [
+        {
+            "name": "Hugo Martinez",
+            "role": "Developer"
+        },
+        {
+            "name": "RookieRed",
+            "email": "celoundou@rookiered.be",
+            "homepage": "https://www.rookie.red/",
+            "role": "Developer"
+        },
+        {
+            "name": "Jean-Jérôme Soueix",
+            "email": "celoundou@rookiered.be",
+            "role": "Owner"
+        }
+    ]
+}

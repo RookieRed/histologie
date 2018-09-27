@@ -4,3 +4,4 @@ config/config.cfg
 sftp-config.json
 logs/
 .env
+/vendor/
