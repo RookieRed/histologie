@@ -1,0 +1,7 @@
+Bonjour {utilisateur},
+
+Votre commande n°{numCommande} est passée. Vous pouvez télécharger le récapitulatif en cliquant ici.
+Nous vous recontacterons lorsque votre commande sera prête.
+
+Bonne journée,
+Plateau Histologie

@@ -112,7 +112,6 @@ function sendMail($from, $to, $subject, $modeleMail, $search, $replace)
         //Remplacement des paramètres modifiables contenus dans les mails
         $bodyHTML = str_replace($search, $replace, $bodyHTML);
         $bodyText = str_replace($search, $replace, $bodyText);
-        $bodyText = str_replace('<br />', '', $bodyText); //Il faut supprimer les balises <br> présentes dans le mail en version texte à cause de nl2br
         $subject = str_replace($search, $replace, $subject);
     }
     else {
