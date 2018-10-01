@@ -399,18 +399,19 @@ $descEtapes = [
     ]
 ];
 
-if(isset($_SESSION['idUtilisateur'])) {
-    $utilisateur = $db->getUtilisateur($_SESSION['idUtilisateur']);
-}
-if(isset($_SESSION['idAdministrateur']))
-{
+if(isset($_SESSION['idAdministrateur'])) {
     $administrateur = $db->getAdministrateur($_SESSION['idAdministrateur']);
+    unset($_SESSION['idUtilisateur'], $utilisateur);
+} else if(isset($_SESSION['idUtilisateur'])) {
+    $utilisateur = $db->getUtilisateur($_SESSION['idUtilisateur']);
+    unset($_SESSION['idAdministrateur'], $administrateur);
 }
 
 function estConnecte() {
     global $utilisateur;
     global $administrateur;
-    return isset($_SESSION['idUtilisateur'], $utilisateur) or isset($_SESSION['idAdministrateur'], $administrateur);
+    return (strpos($_SERVER['REQUEST_URI'], '/plateau/') === false && isset($_SESSION['idUtilisateur'], $utilisateur))
+        || (strpos($_SERVER['REQUEST_URI'], '/plateau/') ===  0 && isset($_SESSION['idAdministrateur'], $administrateur));
 }
 
 //   -Si un utilisateur n'est pas connecté
