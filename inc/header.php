@@ -17,7 +17,7 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body<?= isset($_SESSION['idAdministrateur']) ? ' class="admin" ' : '' ; ?>>
+    <body<?= strpos($_SERVER['REQUEST_URI'], '/plateau/') ===  0 ? ' class="admin" ' : '' ; ?>>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -30,16 +30,6 @@
                     </button>
                     <a class="navbar-brand" href="http://www.inserm.fr/" target="_blank"><img alt="Inserm" src="/img/logo-inserm.jpg"></a>
                 </div>
-                <?php
-                if(isset($utilisateur))
-                {
-                ?>
-                <div class="hidden-xs text-center">
-                    <span class="navbar-text"><?=$utilisateur['prenomUtilisateur'] . " " . $utilisateur['nomUtilisateur'] . ' Equipe ' . $utilisateur['nomEquipe']?></span>
-                </div>
-                <?php
-                }
-                ?>
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
                         <?php if(estConnecte()) { ?>

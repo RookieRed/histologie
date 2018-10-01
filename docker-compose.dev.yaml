@@ -7,3 +7,5 @@ services:
     hostname: 'mailhog'
     ports:
       - '8025:8025'
+    links:
+      - php

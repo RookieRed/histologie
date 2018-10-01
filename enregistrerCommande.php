@@ -18,7 +18,9 @@ if($idCommande === false) {
 
 // Envoie du mail de confirmation
 $lienPDF = "/commande/telecharger.php?idCommande=$idCommande";
-$utilisateur = $db->getUtilisateur($_SESSION['idUtilisateur']);
+if (!isset($utilisateur)) {
+    $utilisateur = $db->getUtilisateur($_SESSION['idUtilisateur']);
+}
 $destinataire = [
     "mail" => $utilisateur['mailUtilisateur'],
     "name" => $utilisateur['prenomUtilisateur'] . " " . $utilisateur['nomUtilisateur']

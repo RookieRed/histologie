@@ -40,20 +40,15 @@ docker-compose --version
 
 ### PHP service
 
-This part is important to setup your PHP environment. First you'll need to build the Docker image, then you'll have to create
-the logs' folder from the container itself.
+This part is important to setup your PHP environment. First you'll have to create the logs' folder from the container 
+itself, and then run a `composer install` to setup the project's dependencies.
 
-To build the php service execute the command from project's root :
-
-```bash
-docker-compose build
-```
-
-Then you need to execute the following command to create the logs' folder with the correct rights :
+Execute the following command to create the logs' folder with the correct rights :
 
 ```bash
 docker-compose run php /bin/bash -c "mkdir -p /web/logs /web/commande/pdf; \
-                chown -R www-data:www-data /web/logs /web/commande/pdf;"
+                chown -R www-data:www-data /web/logs /web/commande/pdf; \
+                cd /web && composer install;"
 ```
 
 ### Run the app
@@ -73,7 +68,7 @@ To test, simply go to the application URL.
 
 #### Empty scheme
 
-To create the database scheme execute the following command **while containers are running** :
+To create the database scheme execute the following command **while MySQL service is running** :
 
 ```bash
 docker-compose exec mysql sh -c 'mysql -u "$MYSQL_USER" \

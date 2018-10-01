@@ -15,13 +15,11 @@ services:
 
   php:
     container_name: php
-    build:
-      context: "docker/php"
-      dockerfile: "Dockerfile"
-    volumes:
-      - "./:/web"
+    build: './docker/php'
     links:
       - mysql
+    volumes:
+      - "./:/web"
 
 
   mysql:
