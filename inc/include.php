@@ -112,7 +112,6 @@ function sendMail($from, $to, $subject, $modeleMail, $search, $replace)
         //Remplacement des paramètres modifiables contenus dans les mails
         $bodyHTML = str_replace($search, $replace, $bodyHTML);
         $bodyText = str_replace($search, $replace, $bodyText);
-        $bodyText = str_replace('<br />', '', $bodyText); //Il faut supprimer les balises <br> présentes dans le mail en version texte à cause de nl2br
         $subject = str_replace($search, $replace, $subject);
     }
     else {
@@ -324,18 +323,23 @@ function getNumCommandeHtml($numCommande) {
  * @return string
  */
 function getRecapColoration($lames) {
-    if (count($lames) == 0) {
+    if (!is_array($lames) || count($lames) <= 0) {
         return '/';
     }
-    $ret = '<ul>';
-    foreach($lames as $lame) {
-        if($lame['nomColoration']) {
-            $ret .= '<li>'.$lame['nomColoration'].'</li>';
-        }
-    }
-    return $ret === '<ul>' ? '/' : $ret.'</ul>';
+    $ret = array_reduce($lames, function ($str, $lame) {
+        return $str . ' - '. $lame['nomColoration'] . '<br>';
+    }, '');
+    return substr($ret, 0, strlen($ret) - 4);
 }
 
+
+/* =================================
+ *
+ * ==>  REQUIREMENTS & INCLUDES  <==
+ *
+  ================================*/
+
+require $_SERVER['DOCUMENT_ROOT'] . $path . "/vendor/autoload.php";
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/logger.class.php";
 $logger = new Logger($config['log_level']);
 require $_SERVER['DOCUMENT_ROOT'] . $path . "/inc/database.class.php";

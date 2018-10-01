@@ -1,6 +1,6 @@
 <?php
-require "inc/include.php";
-require "inc/header.php";
+require_once "inc/include.php";
+require_once "inc/header.php";
 ?>
 <div class="container">
     <div class="col-md-6 col-md-offset-3">

@@ -36,6 +36,9 @@ ldap_dn_users ou=users,dc=inserm.fr,dc=local
 # {prenomr} :       Prénom du responsable (Disponible uniquement lors des refus/acceptations)
 # {nomr} :          Nom du responsable (Disponible uniquement lors des refus/acceptations)
 # {url} :           URL de l'application (paramètrable dans config.cfg)
+
+mail_commande_creee commande_creee
 mail_commande_prete commande_prete
 
+objet_commande_creee Confirmation de commande
 objet_commande_prete Votre commande est prête

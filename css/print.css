@@ -1,0 +1,72 @@
+body {
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+p.date {
+    text-align: right;
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+td, th {
+    padding: 5px 10px;
+    border: 1px solid #555;
+    text-align: left;
+}
+
+th {
+    background: #eee;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+td {
+    font-size: 13px;
+    background: white;
+}
+
+td ul li:before {
+    content: '-';
+    position: relative;
+}
+
+fieldset {
+    margin-top: 15px;
+    border-top: 0.5px solid #aaa;
+    border-bottom: 0.5px solid #aaa;
+    border-left: none;
+    border-right: none;
+    border-radius: unset !important;
+    padding: 20px 10px 20px;
+}
+
+fieldset legend {
+    font-size: 15px;
+    margin: 0;
+    background: white;
+    padding: 0 15px;
+    z-index: 10;
+    border: none;
+}
+
+fieldset p.bloc-commentaire {
+    margin: 0;
+    color: #555;
+    font-size: 13px;
+    line-height: 16px;
+}
