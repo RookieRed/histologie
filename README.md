@@ -52,8 +52,8 @@ docker-compose build
 Then you need to execute the following command to create the logs' folder with the correct rights :
 
 ```bash
-docker-compose run php /bin/bash -c "mkdir /web/logs /web/commande/pdf; \
-                chown www-data:www-data /web/logs /web/commande/pdf;"
+docker-compose run php /bin/bash -c "mkdir -p /web/logs /web/commande/pdf; \
+                chown -R www-data:www-data /web/logs /web/commande/pdf;"
 ```
 
 ### Run the app
@@ -71,6 +71,8 @@ To test, simply go to the application URL.
 
 ### Setup database
 
+#### Empty scheme
+
 To create the database scheme execute the following command **while containers are running** :
 
 ```bash
@@ -86,3 +88,11 @@ This will create the empty scheme with a default admin account with the followin
 
 I strongly advice you to change those credentials, or to create your own admin account before deleting this one,
 when you first logged into the application.
+
+#### Migrate database
+
+If you want to migrate your current database to the MySQL service, you need to : 
+
+ * Export your current database as a `.sql` file
+ * Put it inside the  `bdd/` folder
+ * Run the previous command by replacing the `empty-scheme.sql` file by your's
