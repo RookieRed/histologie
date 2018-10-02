@@ -8,3 +8,4 @@ logs/
 commande/pdf/
 bdd/backups/
 img/logos/
+**.htacess
