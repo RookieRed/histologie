@@ -1,6 +1,6 @@
 <footer>
     &copy; <?=date('Y')?> Hugo Martinez &amp;
-    <a href="http://www.rookie.red" style="color: unset;" target="_blank">Rookie<span style="color:red;font-weight: 800;">Red</span></a>
+    <a href="http://www.rookie.red" style="color: unset;" target="_blank">Rookie<span style="color:red;">Red</span></a>
     - Chef de projet : Jean-Jérôme Soueix
 </footer>
 <script src="<?=$path?>/js/jquery-3.2.0.min.js"></script>

@@ -247,3 +247,10 @@ a.down-btn:hover:after {
 div.margin-height {
     margin: 10px 0;
 }
+
+/* Parametres */
+
+.row.centered-content {
+    display: flex;
+    justify-content: center;
+}
