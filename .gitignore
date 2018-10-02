@@ -6,3 +6,4 @@ logs/
 .env
 /vendor/
 commande/pdf/
+**.htacess
