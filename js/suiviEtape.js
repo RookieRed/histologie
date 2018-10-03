@@ -47,7 +47,7 @@ $(document).ready(function() {
         .then(function(toBeDeleted) {
             if (toBeDeleted) {
                 $.ajax({
-                    url: "ajax/suiviEtape.php?etape=" + etape + "&idCommande=" + ligne.data("id"),
+                    url: "ajax/suiviEtape.php?idCommande=" + ligne.data("id"),
                     method: "DELETE",
                     dataType: "json"
                 })

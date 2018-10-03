@@ -7,12 +7,25 @@ if(!isset($administrateur))
     $message = "Votre session a expiré, merci de vous reconnecter.";
 }
 else {
-    if(!isset($_GET['etape']) || !isset($_POST['dates']) || !isset($_POST['lignesIds']))
-    {
+    // Suppression de commande
+    if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+        $id = intval($_GET['idCommande']);
+        if (isset($id) && is_numeric($id)) {
+            if ($db->supprimerCommande($id) !== false) {
+                $message = 'Commande supprimée !';
+                $success = true;
+            } else {
+                $message = 'Erreur base de données';
+                $success = false;
+            }
+        } else {
+            $message = "Informations manquantes!";
+        }
+    }
+    else if(!isset($_GET['etape']) || !isset($_POST['dates']) || !isset($_POST['lignesIds'])) {
         $message = "Informations manquantes!";
     }
-    else
-    {
+    else {
         if(!is_array($_POST['lignesIds']) || !is_array($_POST['dates']) || count($_POST['lignesIds']) != count($_POST['dates']))
         {
             $message = "Données incorrectes.";

@@ -59,7 +59,10 @@ require "../inc/header.php";
                                 <?php
                             }
                             ?>
-                            <th></th>
+                            <?php if ($etape == 1) { ?>
+                            <th class="btn-cases"></th>
+                            <?php } ?>
+                            <th class="btn-cases"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,7 +91,10 @@ require "../inc/header.php";
                                 <?php
                             }
                             ?>
-                            <td class="input-td"><input type="button" class="btn btn-default btn-sm validerLigne" value="OK"></td>
+                            <?php if ($etape == 1) { ?>
+                            <td class="btn-cases input-td"><input type="button" class="btn btn-danger btn-sm supprimerLigne" value="Supprimer"></td>
+                            <?php } ?>
+                            <td class="btn-cases input-td"><input type="button" class="btn btn-default btn-sm validerLigne" value="Valider"></td>
                         </tr>
                         <?php
                         }

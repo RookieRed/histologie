@@ -120,6 +120,11 @@ input[type="number"] {
     padding: 0;
 }
 
+.btn-cases {
+    max-width: 90px !important;
+    text-align: right;
+}
+
 /*
 ====================== ADMINISTRATION =====================
 */
