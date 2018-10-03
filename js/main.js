@@ -42,7 +42,7 @@ function formatMail(prenom, nom)
 
 $(document).ready(function() {
     //Activation des tooltips
-    $("[data-toggle=tooltip").tooltip();
+    $("[data-toggle=tooltip]").tooltip();
     //Activation des datepickers
     $(".datepicker").datepicker({
         language: "fr",
@@ -67,16 +67,23 @@ $(document).ready(function() {
         swal({
             title: "Changer le mot de passe",
             text: "Entrez le nouveau mot de passe : ",
-            type: "input",
-            inputType: "password",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            animation: "slide-from-top"
+            content: {
+                element: "input",
+                attributes: {
+                    placeholder: "Nouveau mot de passe",
+                    type: "password",
+                },
+            },
+            buttons: ['Annuler', 'Enregistrer']
         },
         function(mdp){
             if (mdp === false) return false;
             if (mdp === "") {
-                swal.showInputError("Vous devez rentrer un mot de passe!");
+                swal({
+                    title: "Erreur",
+                    text: "Vous devez rentrer un mot de passe!",
+                    icon: 'error',
+                });
                 return false
             }
             //Sauvegarde du nouveau mot de passe en ajax
@@ -89,11 +96,20 @@ $(document).ready(function() {
                 success: function(result, statut) {
                     if(result.success)
                     {
-                        swal("Succès!", "Mot de passe modifié avec succès!", "success");
+
+                        swal({
+                            title: "Succès !",
+                            text: "Mot de passe modifié avec succès!",
+                            icon: 'success',
+                        });
                     }
                     else
                     {
-                        swal.showInputError(result.message);
+                        swal({
+                            title: "Erreur",
+                            text: result.message,
+                            icon: 'error'
+                        });
                     }
                 }
             });

@@ -19,7 +19,11 @@ $(document).ready(function() {
                 location.reload();
             }
             else {
-                swal("Erreur!", result.message, "error");
+                swal({
+                    title: "Erreur!",
+                    text: result.message,
+                    icon: "error"
+                });
             }
         });
         ligne.find('input').val("");
@@ -44,7 +48,11 @@ $(document).ready(function() {
                     cell.html(nouveauNom);
                 }
                 else {
-                    swal("Erreur!", result.message, "error");
+                    swal({
+                        title: "Erreur!",
+                        text: result.message,
+                        icon: "error"
+                    });
                 }
             });
         }
@@ -56,20 +64,21 @@ $(document).ready(function() {
         swal({
             title: "Etes-vous sur?",
             text: "Voulez-vous vraiment supprimer cette donnée?",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Oui",
-            cancelButtonText: "Annuler"
-        },
-        function(){
+            icon: "warning",
+            buttons: ["Annuler", "Supprimer"]
+        })
+        .then(function(){
             request("supprimer", ressource, {id: ligne.data('id')}, function(result) {
                 if(result.success)
                 {
                     ligne.remove();
                 }
                 else {
-                    swal("Erreur!", result.message, "error");
+                    swal({
+                        title: "Erreur!",
+                        text: result.message,
+                        icon: "error"
+                    });
                 }
             });
         });

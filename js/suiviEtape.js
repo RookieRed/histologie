@@ -30,6 +30,39 @@ $(document).ready(function() {
         });
     });
 
+    $('.supprimerLigne').click(function () {
+        var etape = $("#etape").val();
+        if (parseInt(etape) !== 1) {
+            console.log('Must be the first step');
+            return;
+        }
+        var ligne = $(this).closest("tr");
+        swal({
+            title: 'Confirmation de suppression',
+            text: 'Voulez vous vraiment supprimer cette commande ?',
+            icon: 'warning',
+            buttons: ['Annuler', 'Supprimer'],
+            dangerMode: true
+        })
+        .then(function(toBeDeleted) {
+            if (toBeDeleted) {
+                $.ajax({
+                    url: "ajax/suiviEtape.php?etape=" + etape + "&idCommande=" + ligne.data("id"),
+                    method: "DELETE",
+                    dataType: "json"
+                })
+                .done(function(result) {
+                    if(result.success) {
+                        swal("OK!", result.message, "success");
+                        ligne.remove();
+                    } else {
+                        swal("Erreur!", result.message, "error");
+                    }
+                });
+            }
+        })
+    });
+
     $("input[type='checkbox']").click(function(e) {
         if(e.shiftKey && lastChecked !== null && lastChecked != this)
         {
