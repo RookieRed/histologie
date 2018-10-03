@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 
 services:
   mailhog:
@@ -9,3 +9,13 @@ services:
       - '8025:8025'
     links:
       - php
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      PMA_HOST: ${MYSQL_HOSTNAME}
+    links:
+      - mysql
+    ports:
+      - "8080:80"
