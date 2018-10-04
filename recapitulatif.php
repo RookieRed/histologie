@@ -3,6 +3,7 @@ require "inc/include.php";
 require "inc/header.php";
 ?>
 <div class="container">
+    <?php include 'inc/breadcrumb.php'; ?>
     <div class="col-md-12">
         <div class="panel panel-primary">
             <div class="panel-heading"><?=$_SESSION['commande']['type'] == "P" ? "Paraffine" : "Cryo"?> - Commande N° <?=$_SESSION['commande']['numProvisoire']?></div>

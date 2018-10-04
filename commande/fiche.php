@@ -1,6 +1,6 @@
 <?php
 
-if(!isset($idCommande) || !isset($commande)) {
+if(!isset($idCommande) || !isset($newCommand)) {
     echo 'Nope';
     exit;
 }
@@ -9,11 +9,11 @@ if(!isset($idCommande) || !isset($commande)) {
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Fiche Commande N°<?=$commande['numCommande']?></title>
+        <title>Fiche Commande N°<?=$newCommand['numCommande']?></title>
         <link rel="stylesheet" href="../css/print.css" type="text/css">
     </head>
     <body>
-        <h1>Commande <?=$commande['numCommande']?></h1>
+        <h1>Commande <?=$newCommand['numCommande']?></h1>
         <h2><?=$utilisateur['prenomUtilisateur'] . " " . $utilisateur['nomUtilisateur'] . " - " .
             $utilisateur['nomCentre'] . ", équipe " . $utilisateur['nomEquipe']?></h2>
         <table class="table">
@@ -30,7 +30,7 @@ if(!isset($idCommande) || !isset($commande)) {
             </thead>
             <tbody>
                 <?php
-                foreach($commande['echantillons'] as $echantillon)
+                foreach($newCommand['echantillons'] as $echantillon)
                 {
                 ?>
                 <tr>
@@ -48,12 +48,12 @@ if(!isset($idCommande) || !isset($commande)) {
             </tbody>
         </table>
         <p class="date">Edité le <?=date('d/m/Y H:i')?></p>
-        <?php if (strlen($commande['commentaireUtilisateur']) > 0) { ?>
+        <?php if (strlen($newCommand['commentaireUtilisateur']) > 0) { ?>
         <fieldset>
             <legend>
                 Commentaire utilisateur
             </legend>
-            <p class="bloc-commentaire"><?=$commande['commentaireUtilisateur']?></p>
+            <p class="bloc-commentaire"><?=$newCommand['commentaireUtilisateur']?></p>
         </fieldset>
         <?php } ?>
     </body>

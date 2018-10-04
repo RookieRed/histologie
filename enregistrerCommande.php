@@ -37,6 +37,7 @@ $logger->log("Application", "INFO", "Commande #" . $idCommande . " créée par l
 require "inc/header.php";
 ?>
 <div class="container">
+    <?php include 'inc/breadcrumb.php'; ?>
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-primary">
             <div class="panel-heading"><?=$_SESSION['commande']['type'] == "P" ? "Paraffine" : "Cryo"?></div>
