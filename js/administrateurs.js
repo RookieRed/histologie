@@ -4,17 +4,21 @@ $(document).ready(function() {
         swal({
             title: "Change le mot de passe",
             text: "Entrez le nouveau mot de passe :",
-            type: "input",
-            showCancelButton: true,
-            closeOnConfirm: false,
-            animation: "slide-from-top",
-            inputType: "password"
-        },
-        function(inputValue){
-            if (inputValue === false) return false;
+            icon: "info",
+            content: {
+                element: "input",
+                attributes: {
+                    placeholder: "Nouveau mot de passe",
+                    type: "password",
+                },
+            },
+            buttons: ['Annuler', 'Enregistrer']
+        })
+        .then(function(inputValue){
+            if (inputValue === null) return false;
 
             if (inputValue === "") {
-                swal.showInputError("Vous devez rentrer quelque chose!");
+                swal('Erreur !',"Vous devez rentrer quelque chose!", 'error');
                 return false;
             }
             $.ajax({
@@ -31,14 +35,14 @@ $(document).ready(function() {
                     swal({
                         title: "Succès!",
                         text: result.message,
-                        type: "success"
+                        icon: "success"
                     });
                 }
                 else {
                     swal({
                         title: "Erreur!",
                         text: result.message,
-                        type: "error"
+                        icon: "error"
                     });
                 }
             });
@@ -50,39 +54,39 @@ $(document).ready(function() {
         var ligne = $(this).closest("tr");
         swal({
             title: "Etes-vous sur?",
+            icon: 'warning',
+            dangerMode: true,
             text: "Voulez-vous vraiment supprimer cet administrateur?",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Oui",
-            cancelButtonText: "Annuler",
-            closeOnConfirm: false
-        },
-        function() {
-            $.ajax({
-                url: "ajax/administrateurs.php?action=supprimer",
-                method: "POST",
-                data: {
-                    idAdministrateur: idAdministrateur
-                },
-                dataType: "json"
-            }).done(function(result) {
-                if(result.success)
-                {
-                    ligne.remove();
-                    swal({
-                        title: "Succès!",
-                        text: result.message,
-                        type: "success"
-                    });
-                }
-                else {
-                    swal({
-                        title: "Erreur!",
-                        text: result.message,
-                        type: "error"
-                    });
-                }
-            });
+            buttons: ['Annuler', 'Supprimer']
+        })
+        .then(function(value) {
+            if (value === true) {
+                $.ajax({
+                    url: "ajax/administrateurs.php?action=supprimer",
+                    method: "POST",
+                    data: {
+                        idAdministrateur: idAdministrateur
+                    },
+                    dataType: "json"
+                }).done(function (result) {
+                    if (result.success) {
+                        ligne.remove();
+                        swal({
+                            title: "Succès!",
+                            text: result.message,
+                            icon: "success"
+                        });
+                    }
+                    else {
+                        swal({
+                            title: "Erreur!",
+                            text: result.message,
+                            icon: "error"
+                        });
+                    }
+                });
+
+            }
         });
     });
 
@@ -114,7 +118,7 @@ $(document).ready(function() {
                 swal({
                     title: "Erreur!",
                     text: result.message,
-                    type: "error"
+                    icon: "error"
                 });
             }
         });

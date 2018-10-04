@@ -321,8 +321,8 @@ ALTER TABLE `Commande`
 -- Contraintes pour la table `Echantillon`
 --
 ALTER TABLE `Echantillon`
+  ADD CONSTRAINT `FK_Echantillon_idCommande` FOREIGN KEY (`idCommande`) REFERENCES `Commande` (`idCommande`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_Echantillon_idAnimal` FOREIGN KEY (`idAnimal`) REFERENCES `Animal` (`idAnimal`),
-  ADD CONSTRAINT `FK_Echantillon_idCommande` FOREIGN KEY (`idCommande`) REFERENCES `Commande` (`idCommande`),
   ADD CONSTRAINT `FK_Echantillon_idInclusion` FOREIGN KEY (`idInclusion`) REFERENCES `Inclusion` (`idInclusion`),
   ADD CONSTRAINT `FK_Echantillon_idOrgane` FOREIGN KEY (`idOrgane`) REFERENCES `Organe` (`idOrgane`);
 

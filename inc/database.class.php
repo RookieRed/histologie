@@ -914,4 +914,9 @@ class Database {
         return $this->execute('UPDATE Administrateur SET passAdmin = ? WHERE idAdmin = ?', $passAdmin, $idAdministrateur);
     }
 
+    public function supprimerCommande($idCommande)
+    {
+        return $this->execute('DELETE FROM Commande WHERE idCommande = ?', $idCommande);
+    }
+
 }
