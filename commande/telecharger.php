@@ -18,12 +18,12 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '/commande/pdf/';
 $filename = 'Commande-' . $numCommande . '.pdf';
 
 if (!file_exists($path . $filename)) {
-    $commande = $db->getCommandePourUtilisateur($idCommande, $_SESSION['idUtilisateur']);
+    $commande = $db->getCommandeById($idCommande);
     if(!isset($commande)) {
         header("HTTP/1.0 404 Not Found");
         exit;
     }
-    $utilisateur = $db->getUtilisateur($_SESSION['idUtilisateur']);
+    $utilisateur = $db->getUtilisateur($commande['idUtilisateur']);
     try {
         ob_start();
         require_once 'fiche.php';
@@ -41,5 +41,5 @@ if (!file_exists($path . $filename)) {
 } else {
     header('Content-type: application/pdf');
     header("Content-Disposition:attachment;filename='$filename'");
-    readfile($filename);
+    readfile($path . $filename);
 }

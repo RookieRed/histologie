@@ -14,7 +14,8 @@ if(empty($_GET['etape']) || $_GET['etape'] < 1 || $_GET['etape'] > 5)
 $etape = $_GET['etape'];
 $title = "Suivi " . ($type == "P" ? "Paraffine" : "Cryo");
 $titre = $title;
-$lignes = call_user_func($descEtapes[$etape]['methodes']['get'], $type);
+$lignes = call_user_func($descEtapes[$etape]['methodes']['get'], $type) ?? [];
+$ancienId = null;
 require "../inc/header.php";
 ?>
 <?php if (count($lignes) >= 10) { ?>
@@ -42,7 +43,7 @@ require "../inc/header.php";
                             <th><input type="checkbox" id="selectionnerLignes"></th>
                             <?php
                             $keys = array_keys($lignes[0]);
-                            unset($keys[0]);
+                            unset($keys[0], $keys[1]);
                             foreach($keys as $key)
                             {
                             ?>
@@ -62,6 +63,7 @@ require "../inc/header.php";
                             <?php if ($etape == 1) { ?>
                             <th class="btn-cases"></th>
                             <?php } ?>
+                            <th class="btn-cases"></th>
                             <th class="btn-cases"></th>
                         </tr>
                     </thead>
@@ -95,6 +97,9 @@ require "../inc/header.php";
                             <td class="btn-cases input-td"><input type="button" class="btn btn-danger btn-sm supprimerLigne" value="Supprimer"></td>
                             <?php } ?>
                             <td class="btn-cases input-td"><input type="button" class="btn btn-default btn-sm validerLigne" value="Valider"></td>
+                            <td class="btn-cases input-td">
+                                <a class="btn btn-default btn-sm" target="_blank" href="/commande/telecharger.php?idCommande=<?= $ligne['cid'] ?>">Télécharger PDF</a>
+                            </td>
                         </tr>
                         <?php
                         }

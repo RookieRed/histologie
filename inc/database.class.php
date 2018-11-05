@@ -184,7 +184,7 @@ class Database {
     //Retourne une liste de commandes à réceptionner
     public function getCommandesAReceptionner($type)
     {
-        return $this->query('SELECT idCommande id, numCommande "Commande N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
+        return $this->query('SELECT idCommande id, idCommande cid, numCommande "Commande N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
                             FROM Commande c, Utilisateur u
                             WHERE dateReceptionCommande IS NULL AND LEFT(numCommande, 1) = ?
                               AND c.idUtilisateur = u.idUtilisateur
@@ -213,7 +213,7 @@ class Database {
     //Retourne une liste de commandes prêtes à être renvoyées
     public function getCommandesARenvoyer($type)
     {
-        $commandes = $this->query('SELECT DISTINCT c.idCommande id, numCommande "Commande N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
+        $commandes = $this->query('SELECT DISTINCT c.idCommande id, c.idCommande cid, numCommande "Commande N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
                                    FROM Commande c
                                    LEFT JOIN Echantillon e ON c.idCommande = e.idCommande
                                    LEFT JOIN Lame l ON e.idEchantillon = l.idEchantillon
@@ -221,7 +221,7 @@ class Database {
                                    INNER JOIN Equipe eq ON u.idEquipe = eq.idEquipe
                                    INNER JOIN Centre ce ON ce.idCentre = eq.idCentre
                                    WHERE LEFT(numCommande, 1) = ? AND dateRetourCommande IS NULL
-                                   GROUP BY numCommande, commentairePlateau, dateRetourCommande, dateCommande
+                                   GROUP BY c.idCommande, numCommande, commentairePlateau, dateRetourCommande, dateCommande
                                    HAVING MIN(
                                        CASE
                                            WHEN dateReceptionCommande IS NULL THEN "Non reçue"
@@ -302,15 +302,15 @@ class Database {
             $equipe = "%";
         //On utilise MIN car il est obligatoire d'utiliser une fonction d'aggrégation avec le group by...
         //Rajout d'espaces devant les états pour définir une priorité lorsque 2 échantillons sont à des états différents
-        return $this->query('SELECT DISTINCT numCommande, commentairePlateau, u.nomUtilisateur, u.prenomUtilisateur,
+        return $this->query('SELECT DISTINCT  c.idCommande, numCommande, commentairePlateau, u.nomUtilisateur, u.prenomUtilisateur,
                              DATE_FORMAT(dateRetourCommande, "%d-%m-%Y") dateRetourCommande,
                              DATE_FORMAT(dateCommande, "%d-%m-%Y") dateCommande,
                              MIN(CASE
                                 WHEN dateReceptionCommande IS NULL THEN "Non reçue"
                                 WHEN dateRetourCommande IS NOT NULL THEN "Retournée"
-                                WHEN e.idInclusion IS NOT NULL AND e.dateInclusion IS NULL THEN "   Inclusion"
-                                WHEN e.epaisseurCoupes IS NOT NULL AND e.dateCoupe IS NULL THEN "  Coupe"
-                                WHEN l.idColoration IS NOT NULL AND l.dateColoration IS NULL THEN " Coloration"
+                                WHEN e.idInclusion IS NOT NULL AND e.dateInclusion IS NULL THEN "Inclusion"
+                                WHEN e.epaisseurCoupes IS NOT NULL AND e.dateCoupe IS NULL THEN "Coupe"
+                                WHEN l.idColoration IS NOT NULL AND l.dateColoration IS NULL THEN "Coloration"
                                 ELSE "En cours"
                              END) AS etat
                              FROM Commande c
@@ -324,32 +324,9 @@ class Database {
                              OR CONCAT(u.prenomUtilisateur, " ", u.nomUtilisateur) LIKE ?)
                              AND YEAR(c.dateCommande) LIKE ? AND e.identAnimalEchantillon LIKE ?
                              AND LEFT(c.numCommande, 1) = ?
-                             GROUP BY numCommande, commentairePlateau, dateRetourCommande, dateCommande, nomUtilisateur, prenomUtilisateur
+                             GROUP BY  c.idCommande, numCommande, commentairePlateau, dateRetourCommande, dateCommande, nomUtilisateur, prenomUtilisateur
                              ORDER BY c.idCommande DESC', $commande, $equipe,
                              $utilisateur, $utilisateur, $annee, $echantillon, $type);
-
-
-                             /*
-                             SELECT numCommande, commentairePlateau, u.nomUtilisateur, u.prenomUtilisateur,
-                                                  DATE_FORMAT(dateRetourCommande, "%d-%m-%Y") dateRetourCommande,
-                                                  DATE_FORMAT(dateCommande, "%d-%m-%Y") dateCommande,
-                                                  CASE
-                                                     WHEN dateReceptionCommande IS NULL THEN "Non reçue"
-                                                     WHEN dateRetourCommande IS NOT NULL THEN "Retournée"
-                                                     WHEN e.idInclusion IS NOT NULL AND e.dateInclusion IS NULL THEN "   Inclusion"
-                                                     WHEN e.epaisseurCoupes IS NOT NULL AND e.dateCoupe IS NULL THEN "  Coupe"
-                                                     WHEN l.idColoration IS NOT NULL AND l.dateColoration IS NULL THEN " Coloration"
-                                                     ELSE "En cours"
-                                                  END AS etat
-                                                  FROM Commande c
-                                                  LEFT JOIN Echantillon e ON c.idCommande = e.idCommande
-                                                  LEFT JOIN Lame l ON e.idEchantillon = l.idEchantillon
-                                                  INNER JOIN Utilisateur u ON u.idUtilisateur = c.idUtilisateur
-                                                  INNER JOIN Equipe eq ON u.idEquipe = eq.idEquipe
-                                                  INNER JOIN Centre ce ON ce.idCentre = eq.idCentre
-                                                  WHERE numCommande LIKE "P1048-08-17-4";
-
-                             */
     }
 
     public function getCommandesAFacturer($type)
@@ -417,11 +394,11 @@ class Database {
         return $this->execute('UPDATE Commande SET dateFacturationCommande = NOW() WHERE idCommande = ?', $idCommande);
     }
 
-    public function getCommandePourUtilisateur($idCommande, $idUtilisateur)
+    public function getCommandeById($idCommande)
     {
-        $commande = $this->query('SELECT idCommande, numCommande, dateCommande, commentaireUtilisateur
+        $commande = $this->query('SELECT idCommande, idUtilisateur, numCommande, dateCommande, commentaireUtilisateur
                                   FROM Commande
-                                  WHERE idCommande = ? AND idUtilisateur = ?', $idCommande, $idUtilisateur);
+                                  WHERE idCommande = ? ', $idCommande);
         if(isset($commande[0]))
             $commande = $commande[0];
         else
@@ -455,7 +432,7 @@ class Database {
     */
     public function getEchantillonsAInclure()
     {
-        return $this->query('SELECT e.idEchantillon id, e.numEchantillon "Echantillon N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
+        return $this->query('SELECT e.idCommande cid, e.idEchantillon id, e.numEchantillon "Echantillon N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
                              FROM Utilisateur u, Echantillon e
                              INNER JOIN Commande c ON c.idCommande = e.idCommande
                              WHERE c.dateReceptionCommande IS NOT NULL AND LEFT(c.numCommande, 1) = "P"
@@ -486,7 +463,7 @@ class Database {
     //Retourne une liste d'échantillons nécessitant une coupe
     public function getEchantillonsACouper($type)
     {
-        return $this->query('SELECT e.idEchantillon id, e.numEchantillon "Echantillon N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
+        return $this->query('SELECT e.idCommande cid, e.idEchantillon id, e.numEchantillon "Echantillon N°", CONCAT(u.prenomUtilisateur, \' \', u.nomUtilisateur) "Utilisateur"
                              FROM Utilisateur u, Echantillon e
                              INNER JOIN Commande c ON c.idCommande = e.idCommande
                              WHERE c.dateReceptionCommande IS NOT NULL AND e.dateCoupe IS NULL
@@ -517,7 +494,7 @@ class Database {
     //Récupère les échantillons liés à une commande donnée
     public function getEchantillonsPourCommande($idCommande)
     {
-        $echantillons = $this->query('SELECT idEchantillon, numEchantillon, identAnimalEchantillon, nomOrgane,
+        $echantillons = $this->query('SELECT e.idCommande cid, idEchantillon, numEchantillon, identAnimalEchantillon, nomOrgane,
                                       typeAnimal, nomInclusion, epaisseurCoupes, nbCoupes
                                       FROM Echantillon e
                                       INNER JOIN Animal a ON a.idAnimal = e.idAnimal
@@ -549,7 +526,7 @@ class Database {
         dont l'inclusion est effectuée ou n'est pas à formulaire
         et dont la coloration est à faire mais pas effectuée
         */
-        return $this->query('SELECT idLame id, numLame "Lame N°", col.nomColoration Coloration, CONCAT(u.prenomUtilisateur,\' \',u.nomUtilisateur) "Utilisateur"
+        return $this->query('SELECT e.idCommande cid, idLame id, numLame "Lame N°", col.nomColoration Coloration, CONCAT(u.prenomUtilisateur,\' \',u.nomUtilisateur) "Utilisateur"
                              FROM Utilisateur u, Lame l
                              INNER JOIN Echantillon e ON e.idEchantillon = l.idEchantillon
                              INNER JOIN Commande c ON c.idCommande = e.idCommande

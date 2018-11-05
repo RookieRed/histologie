@@ -83,7 +83,7 @@ require "../inc/header.php";
         }
         else {
             $commandes = $db->getArchives($type, $_POST['commande'], $_POST['equipe'], $_POST['annee'], $_POST['utilisateur'],
-                $_POST['echantillon'], $_POST['bloc']);
+                $_POST['echantillon'], $_POST['bloc']) ?? [];
             ?>
         <table class="table table-archives">
             <thead>
@@ -108,6 +108,9 @@ require "../inc/header.php";
                     </th>
                     <th>
                         Date de retour
+                    </th>
+                    <th>
+                        Récapitulatif
                     </th>
                 </tr>
             </thead>
@@ -137,6 +140,9 @@ require "../inc/header.php";
                     </td>
                     <td>
                         <?=$commande['dateRetourCommande']?>
+                    </td>
+                    <td class="btn-cases input-td">
+                        <a class="btn btn-primary btn-sm" target="_blank" href="/commande/telecharger.php?idCommande=<?= $commande['idCommande'] ?>">PDF</a>
                     </td>
                 </tr>
                 <?php

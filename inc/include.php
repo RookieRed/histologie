@@ -310,7 +310,7 @@ function getRecapCoupe($echantillon) {
  * Retourne le numéro de commande formaté en HTML pour affichage.
  */
 function getNumCommandeHtml($numCommande) {
-    if (preg_match('/^([CP]\d+)-(\d+)-(\d+)-(\d+)(-\d+)?$/i', $numCommande,$matches)) {
+    if (preg_match('/^([CP]\d+)-(\d+)-(\d+)-(\d+)((?>-\d+)*)$/i', $numCommande,$matches)) {
         return $matches[1] . '-' . $matches[2] . '-' . $matches[3] . '-<b>' . $matches[4] . '</b>'
             . (isset($matches[5]) ? $matches[5] : '');
     }
@@ -420,9 +420,11 @@ function estConnecte() {
 //   -Si un administrateur n'est pas connecté
 //   -Et qu'on est dans la partie plateau
 // -Si on est pas sur la page de connexion (pour éviter une redirection infinie)
+// - Si on est pas dans la partie commande
 if(((!isset($utilisateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") === false)
         || (!isset($administrateur) && strpos($_SERVER['SCRIPT_FILENAME'], "plateau") !== false))
-    && strpos($_SERVER['SCRIPT_FILENAME'], "connexion.php") === false)
+    && strpos($_SERVER['SCRIPT_FILENAME'], "connexion.php") === false
+    && strpos($_SERVER['SCRIPT_NAME'], '/commande/telecharger.php') === false)
 {
     header("Location: connexion.php");
     exit;
