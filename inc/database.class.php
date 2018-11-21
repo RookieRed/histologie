@@ -166,9 +166,9 @@ class Database {
     //Commande
 
     //Retourne le nombre de commandes effectuées pendant l'année passée en paramètre
-    public function getNbCommandePourAnnee($annee)
+    public function getNbCommandePourAnnee($annee, $type)
     {
-        $result = $this->query('SELECT COUNT(*) nbCommandes FROM Commande WHERE YEAR(dateCommande) = ?', $annee);
+        $result = $this->query('SELECT COUNT(*) nbCommandes FROM Commande WHERE YEAR(dateCommande) = ? AND LEFT(numCommande, 1) = ?', $annee, $type);
         if(isset($result[0]['nbCommandes']))
             return $result[0]['nbCommandes'];
         return 0;
@@ -258,7 +258,7 @@ class Database {
         $this->_handler->beginTransaction();
         $regex = '/((P|C)[\d]{4}-[\d]{2}-[\d]{2}-)[\d]+/';
         preg_match($regex, $numProvisoire, $matches);
-        $numFinal = $matches[1] . ($this->getNbCommandePourAnnee(date("Y")) + 1);
+        $numFinal = $matches[1] . ($this->getNbCommandePourAnnee(date("Y"), substr($numProvisoire, 0, 1)) + 1);
         $success = $success && $this->execute('INSERT INTO Commande (numCommande, dateCommande, idUtilisateur, commentaireUtilisateur)
                         VALUES (?, NOW(), ?, ?)', $numFinal, $idUtilisateur, $commentaireUtilisateur);
         if($success)

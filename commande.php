@@ -12,7 +12,7 @@ if(!isset($_SESSION['commande']) || !isset($_SESSION['commande']['type']) || $_S
     $_SESSION['commande']['type'] = $_GET['type'];
 }
 $_SESSION['commande']['numProvisoire'] = $_GET['type'] . $utilisateur['nomCentre'] . "-" .
-    $utilisateur['nomEquipe'] . "-" . date("y") . "-" . sprintf("%02d", $db->getNbCommandePourAnnee(date("Y")) + 1);
+    $utilisateur['nomEquipe'] . "-" . date("y") . "-" . sprintf("%02d", $db->getNbCommandePourAnnee(date("Y"), $_GET['type']) + 1);
 ?>
 <div class="container">
     <div class="col-md-6 col-md-offset-3">
