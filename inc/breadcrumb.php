@@ -64,6 +64,7 @@ function isDisabled($elem) {
     }
     switch ($elem['name']) {
         case 'Echantillons':
+        case 'Confirmation':
             return false;
         case 'Inclusion':
         case 'Coupe':
@@ -78,15 +79,14 @@ function isDisabled($elem) {
 unset($j);
 $j = 0;
 ?>
-<pre><?php var_dump($maxIndex, $actualIndex, $_SESSION); ?></pre>
 <ul id="breadcrumb">
     <?php
     foreach (BREADCRUMB as $elem) {
         if (isVisible($elem)) {
             $j++;
             ?>
-            <li class="step<?= $j <= $actualIndex ? ' passed' : '' ?><?= $j > $maxIndex || isDisabled($elem) ? ' disabled' : ''?>">
-                <a <?= $j > $maxIndex || isDisabled($elem) ? '' : 'href="'.$elem['link'].'"'?> <?= $j === $actualIndex ? 'class="actual"' : '' ?>>
+            <li class="step<?= $j <= $actualIndex ? ' passed' : '' ?><?= isDisabled($elem) ? ' disabled' : ''?>">
+                <a <?= $elem !== BREADCRUMB[5] || $j > $maxIndex || isDisabled($elem) ? '' : 'href="'.$elem['link'].'"'?>>
                     <span class="number"><?= $j ?></span>
                     <span class="link-label"><?= $elem['name'] ?></span>
                 </a>

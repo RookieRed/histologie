@@ -263,7 +263,11 @@ function connectLDAP($username, $password)
 function compterOperations($operation)
 {
     $nbOperations = 0;
-    foreach($_SESSION['commande']['echantillons'] as $echantillon)
+    $echantillons = $_SESSION['commande']['echantillons'];
+    if (!is_array($echantillons) || $echantillons == null) {
+        return 0;
+    }
+    foreach($echantillons as $echantillon)
     {
         if(isset($echantillon[$operation]) && $echantillon[$operation] == 1)
             $nbOperations++;

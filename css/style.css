@@ -292,6 +292,134 @@ div#recap-popup .events .time-box:not(:nth-child(2)):before {
 }
 
 /*
+=============== FIL D'ARIANE ==============
+*/
+
+#breadcrumb {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    padding: 0;
+}
+
+#breadcrumb > li.step {
+    position: relative;
+    display: flex;
+    height: 30px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    padding: 0 12px;
+    font-size: 14px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    cursor: default;
+    transition: all 0.2s ease-in-out;
+}
+
+#breadcrumb > li.step > a {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+}
+
+#breadcrumb > li.step > a:hover {
+    color: default;
+}
+
+#breadcrumb > li.step:after,
+#breadcrumb > li.step:first-child:before {
+    content: '';
+    height: 30px;
+    width: 30px;
+    display: block;
+    position: absolute;
+    background: white;
+    box-sizing: border-box;
+    z-index: 10;
+    transform: scale(0.707) rotate(45deg);
+}
+
+#breadcrumb > li.step:first-child:before {
+    left: -14px;
+}
+
+#breadcrumb > li.step:after {
+    right: -15px;
+    border-top: 3px solid #eee;
+    border-right: 3px solid #eee;
+    transition: all 0.2s ease-in-out;
+}
+
+#breadcrumb > li.step > a > span.number {
+    display: block;
+    text-align: center;
+    line-height: 22px;
+    width: 22px;
+    height: 22px;
+    margin-left: 12px;
+    margin-right: 7px;
+    color: white;
+    background: #337ab7;
+    border-radius: 30px;
+}
+
+#breadcrumb > li.step > a > span.link-label {
+    z-index: 12;
+    background: transparent;
+}
+
+#breadcrumb > li.step.passed:not(.disabled) {
+    color: white;
+    background: #337ab7;
+    cursor: pointer;
+}
+
+#breadcrumb > li.step.passed:not(.disabled):after {
+    background: #337ab7;
+}
+
+#breadcrumb > li.step.passed:not(.disabled):hover {
+    background: #94c4ec;
+}
+
+#breadcrumb > li.step.passed:not(.disabled):hover:after {
+    background: #94c4ec;
+}
+
+#breadcrumb > li.step.passed:not(.disabled) > a {
+    color: white;
+}
+
+#breadcrumb > li.step.passed:not(.disabled) > a > span.number {
+    background: white;
+    color: #337ab7;
+}
+
+#breadcrumb > li.step.disabled {
+    background: #ddd;
+}
+
+#breadcrumb > li.step.disabled:after {
+    background: #ddd;
+}
+
+#breadcrumb > li.step.disabled > a {
+    color: #aaa;
+}
+
+#breadcrumb > li.step.disabled > a > span.number {
+    background: #aaa;
+    color: #ccc;
+}
+
+/*
 ====================== ADMINISTRATION =====================
 */
 
