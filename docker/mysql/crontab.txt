@@ -1,0 +1,6 @@
+# -----------------------------------
+# --   CRONTAB FOR MYSQL SERVICE   --
+# -----------------------------------
+
+# Backup CSV + drop all commands
+01 00 01 01 * /web/docker/mysql/drop-old-commands.sh --drop-commands >> /web/logs/bdd-backups.log
