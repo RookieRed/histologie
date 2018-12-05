@@ -286,20 +286,23 @@ class Database {
     /*
     * Récupère les archives filtrées en fonction des données du formulaire
     */
-    public function getArchives($type, $commande, $equipe, $annee, $utilisateur, $echantillon, $bloc)
+    public function getArchives($type, $commande, $equipe, $annee, $utilisateur, $echantillon)
     {
         //On échappe les caractères spéciaux de MySQL, on ajoute des % à chaque extrémité des paramètres afin
         //de pouvoir effectuer des recherches partielles (sur le nom de famille par exemple)
         $commande = "%" . str_replace(["%", "_"], ["\\\\%", "\\\\_"], $commande) . "%";
         $utilisateur = "%" . str_replace(["%", "_"], ["\\\\%", "\\\\_"], $utilisateur) . "%";
         $echantillon = "%" . str_replace(["%", "_"], ["\\\\%", "\\\\_"], $echantillon) . "%";
-        $bloc = "%" . str_replace(["%", "_"], ["\\\\%", "\\\\_"], $bloc) ."%";
         //Si l'année ou l'équipe ne sont pas renseignés, on utilise le % afin de ne pas filtrer les résultats sur ces
         //critères
-        if(empty($annee))
+        if(empty($annee)) {
             $annee = "%";
-        if(empty($equipe))
+        } else {
+            $annee = "$annee%";
+        }
+        if(empty($equipe)) {
             $equipe = "%";
+        }
         //On utilise MIN car il est obligatoire d'utiliser une fonction d'aggrégation avec le group by...
         //Rajout d'espaces devant les états pour définir une priorité lorsque 2 échantillons sont à des états différents
         return $this->query('SELECT DISTINCT  c.idCommande, numCommande, commentairePlateau, u.nomUtilisateur, u.prenomUtilisateur,
@@ -322,7 +325,7 @@ class Database {
                              WHERE numCommande LIKE ? AND CONCAT(ce.nomCentre, "-", eq.nomEquipe) LIKE ?
                              AND (CONCAT(u.nomUtilisateur, " ", u.prenomUtilisateur) LIKE ?
                              OR CONCAT(u.prenomUtilisateur, " ", u.nomUtilisateur) LIKE ?)
-                             AND YEAR(c.dateCommande) LIKE ? AND e.identAnimalEchantillon LIKE ?
+                             AND c.dateCommande LIKE ? AND e.identAnimalEchantillon LIKE ?
                              AND LEFT(c.numCommande, 1) = ?
                              GROUP BY  c.idCommande, numCommande, commentairePlateau, dateRetourCommande, dateCommande, nomUtilisateur, prenomUtilisateur
                              ORDER BY c.idCommande DESC', $commande, $equipe,

@@ -133,7 +133,7 @@ input[type="number"] {
     border-color: #df3c73 !important;
 }
 
-.admin div.panel-heading {
+.admin .panel-primary div.panel-heading {
     border-color: #df3c73 !important;
     background-color: #df3c73 !important;
 }
@@ -251,6 +251,10 @@ a.down-btn:hover:after {
 
 div.margin-height {
     margin: 10px 0;
+}
+
+#encart-dl-backup {
+    margin-top: 40px;
 }
 
 /* Parametres */
