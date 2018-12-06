@@ -157,6 +157,9 @@ if(!isset($_POST['change-nb-enchantillons'])  && isset($_POST['suivant']))
         $_SESSION['commande']['echantillons'] = [];
     }
 }
+
+var_dump($_FILES, $_POST);
+
 require "inc/header.php";
 ?>
 <div class="container">
@@ -165,6 +168,7 @@ require "inc/header.php";
             <div class="panel-heading"><?=$_SESSION['commande']['type'] == "P" ? "Paraffine" : "Cryo"?> - Commande N° <?=$_SESSION['commande']['numProvisoire']?></div>
             <div class="panel-body">
                 <h3>Identification des échantillons</h3>
+
                 <?php
                 if(isset($err) && $err)
                 {
@@ -181,7 +185,7 @@ require "inc/header.php";
                             <tr>
                                 <th>Numéro d'échantillon</th>
                                 <th>Animal</th>
-                                <th>Identification animal</th>
+                                <th>Identification animale</th>
                                 <th>Tissu</th>
                                 <?php
                                 if($_SESSION['commande']['type'] == "P")
@@ -338,9 +342,26 @@ require "inc/header.php";
                         <div><input id="nb-echantillons" class="form-control" type="number" value="<?=$nbEchantillons?>" min="0" name="nbEchantillons"/></div>
                         <div><input type="submit" class="btn btn-primary" name="change-nb-enchantillons" value="Changer"></div>
                     </div>
+
                     <a href="commande.php?type=<?=$_SESSION['commande']['type']?>" class="btn btn-default">Précédent</a>
                     <input type="submit" class="btn btn-primary pull-right" name="suivant" value="Suivant">
                 </form>
+
+                <form id="import-xls" action="" method="post" enctype="multipart/form-data">
+                    <div id="encart-import-xls">
+                        <h4>Importer les identifications animales</h4>
+                        <p class="info text-center">Vous pouvez importer les identifiants des animaux à partir d'un fichier Excel. Pour se faire,
+                            <a href="/modele_import_identifiants.csv" target="_blank" download>téléchargez le modèle de fichier en cliquant ici</a>,
+                            puis remplissez-le avec les identifiants animaux, avant de l'importer avec les boutons ci-dessous.</p>
+                        <div class="row text-center">
+                            <label class="btn btn-default" ><span class="glyphicon glyphicon-file"></span> Sélectionner un fichier
+                                <input style="display: none !important;" name="import" type="file" accept=".csv, .xls, .xlsx">
+                            </label>
+                            <input type="submit" name="submit-import" id="send-import-btn" disabled="disabled" class="btn btn-default" value="Envoyer le fichier">
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

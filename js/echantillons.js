@@ -36,7 +36,6 @@ $(document).ready(function() {
         var ligneEchantillon = $(this).closest("tr");
         $(".echantillon .animal").prop("selectedIndex", ligneEchantillon.find(".animal").prop("selectedIndex"));
         $(".echantillon .animalAutre").val(ligneEchantillon.find(".animalAutre").val());
-        $(".echantillon .identAnimal").val(ligneEchantillon.find(".identAnimal").val());
         $(".echantillon .organe").prop("selectedIndex", ligneEchantillon.find(".organe").prop("selectedIndex"));
         $(".echantillon .organeAutre").val(ligneEchantillon.find(".organeAutre").val());
         $(".echantillon .inclusion").prop("selectedIndex", ligneEchantillon.find(".inclusion").prop("selectedIndex"));
@@ -55,4 +54,20 @@ $(document).ready(function() {
             $(this).nextAll("input").addClass("hidden");
         }
     });
+
+    $("input[name=import]").on('change', function () {
+        const input = $(this);
+
+        const submit = $("input#send-import-btn");
+        if (input.val() != null) {
+            submit.prop( "disabled", false );
+            submit.addClass('btn-primary');
+            input.prop( "disabled", true );
+        } else {
+            submit.prop( "disabled", true );
+            submit.addClass('btn-default');
+            submit.removeClass('btn-primary');
+            input.prop( "disabled", false );
+        }
+    })
 });

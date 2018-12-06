@@ -139,6 +139,17 @@ table.table-archives tbody tr:hover {
     text-align: right;
 }
 
+#encart-import-xls {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin-top: 10px;
+}
+
+#encart-import-xls h4 {
+    margin: 10px 0;
+}
+
 /*
 =================== POPUP ECHANTILLONS ================
 */
