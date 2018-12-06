@@ -399,9 +399,8 @@ class Database {
 
     public function getCommandeById($idCommande)
     {
-        $commande = $this->query('SELECT idCommande, idUtilisateur, numCommande, dateCommande, commentaireUtilisateur
-                                  FROM Commande
-                                  WHERE idCommande = ? ', $idCommande);
+        $commande = $this->query('SELECT c.*, CONCAT(u.prenomUtilisateur, " ", u.nomUtilisateur) as utilisateur FROM Commande c, Utilisateur u '
+            . ' WHERE c.idUtilisateur = u.idUtilisateur AND idCommande = ? ', $idCommande);
         if(isset($commande[0]))
             $commande = $commande[0];
         else
