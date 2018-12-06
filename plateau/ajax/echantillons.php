@@ -23,7 +23,7 @@ else {
 
         if ($response->commande != null) {
             // Utilisateur dont la commande ne lui appartient pas
-            if (!isset($administrateur) && $utilisateur['idUtilisateur'] != $response->commande['idUtilisateur']) {
+            if (!isset($administrateur) && $_SESSION['idUtilisateur'] != $response->commande['idUtilisateur']) {
                 $statusCode = 401;
                 $response->commande = null;
                 $response->errorMessage = 'Non authorisé';

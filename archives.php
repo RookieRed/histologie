@@ -107,7 +107,7 @@ require "inc/header.php";
                 foreach($commandes as $commande)
                 {
                 ?>
-                <tr>
+                <tr data-id="<?= $commande['idCommande'] ?>">
                     <td>
                         <?=$commande['dateCommande']?>
                     </td>
@@ -146,4 +146,9 @@ require "inc/header.php";
 </div>
 
 <?php
+
+
+include 'inc/recap-popup.html';
+$scripts = ['archives.js'];
+
 require "inc/footer.php";

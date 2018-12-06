@@ -15,10 +15,13 @@ $(document).ready(function() {
         const endPoint = '/plateau/ajax/echantillons.php';
 
         $.ajax({
-            url: endPoint + '?idCommande=' + idCommande,
+            url: endPoint,
             accept: 'application/json',
             dataType: 'json',
             method: 'GET',
+            data: {
+                idCommande: idCommande
+            },
 
             success: function(response) {
                 const commande = response.commande;
@@ -98,11 +101,12 @@ $(document).ready(function() {
                 }
 
                 // Ouverture de la popup
-                $('#recap-popup').css('margin-top', ($(event.target).offset().top - 250) + 'px');
+                let marginTop = $(event.target).offset().top - 250 > 100 ? $(event.target).offset().top - 250 : 100;
+                $('#recap-popup').css('margin-top', marginTop + 'px');
                 $('#popup-container').show();
             },
 
-            error: function(xhr, statusText, err) {
+            error: function(xhr) {
                 swal({
                     title: "Erreur serveur",
                     text: "Impossible d'afficher cette commande." + (xhr.responseJSON && xhr.responseJSON.errorMessage ? " Motif : '" + xhr.responseJSON.errorMessage + "'" : ''),
