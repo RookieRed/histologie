@@ -16,6 +16,10 @@ textarea { resize: vertical; }
     height:34px;
 }
 
+.table {
+    font-size: 0.95em !important;
+}
+
 footer {
     width:100%;
     text-align: center;

@@ -62,12 +62,10 @@ $(document).ready(function() {
         if (input.val() != null) {
             submit.prop( "disabled", false );
             submit.addClass('btn-primary');
-            input.prop( "disabled", true );
         } else {
             submit.prop( "disabled", true );
             submit.addClass('btn-default');
             submit.removeClass('btn-primary');
-            input.prop( "disabled", false );
         }
-    })
+    });
 });

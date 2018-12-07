@@ -1,6 +1,6 @@
 <?php
 require "inc/include.php";
-if(!isset($_SESSION['commande']) || ((!isset($_POST['nbEchantillons']) || intval($_POST['nbEchantillons']) == 0)
+if(!isset($_SESSION['commande']) || ((!isset($_POST['nbEchantillons']) || intval($_POST['nbEchantillons']) <= 0)
     && !isset($_SESSION['commande']['nbEchantillons'])))
 {
     if(isset($_SESSION['commande']) && isset($_SESSION['commande']['type']))
@@ -13,10 +13,37 @@ if(!isset($_SESSION['commande']) || ((!isset($_POST['nbEchantillons']) || intval
     }
     exit;
 }
+
 if(isset($_POST['change-nb-enchantillons']) || !isset($_SESSION['commande']['nbEchantillons']))
 {
     $_SESSION['commande']['nbEchantillons'] = $_POST['nbEchantillons'];
 }
+
+$err = false;
+// Vérification import
+if (isset($_POST['submit-import']) && !empty($_FILES)) {
+
+    if ($_FILES['import'] == null || $_FILES['import']['error']) {
+        $err = true;
+        $message = 'Erreur lors du téléversement du ficiher.';
+    }
+    $inputFileName = $_FILES['import']['tmp_name'];
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+    $sheetData = array_values($spreadsheet->getActiveSheet()->toArray(null, false, true, true));
+
+    if (!isset($_SESSION['commande']['echantillons'])) {
+        $_SESSION['commande']['echantillons'] = [];
+    }
+
+    for ($i = 1; $i < count($sheetData); $i++) {
+        if (!isset($_SESSION['commande']['echantillons'][$i - 2])) {
+            $_SESSION['commande']['echantillons'][$i - 1] = [];
+        }
+        $_SESSION['commande']['echantillons'][$i - 1]['identAnimal'] = $sheetData[$i]['A'];
+    }
+    $_SESSION['commande']['nbEchantillons'] = max($_SESSION['commande']['nbEchantillons'], count($sheetData) - 1);
+}
+
 $nbEchantillons = $_SESSION['commande']['nbEchantillons'];
 if(!isset($_POST['change-nb-enchantillons'])  && isset($_POST['suivant']))
 {
@@ -24,7 +51,6 @@ if(!isset($_POST['change-nb-enchantillons'])  && isset($_POST['suivant']))
     //  -Champs existent
     //  -Nombre de champs == nombre d'échantillons
     //  -Champs renseignés
-    $err = false;
     $message = "";
     //Variables pour savoir si la prochaine page sera inclusion, coupe ou coloration
     $inclusion = false;
@@ -41,6 +67,8 @@ if(!isset($_POST['change-nb-enchantillons'])  && isset($_POST['suivant']))
         $err = true;
         $message .= "Données incorrectes<br>";
     }
+
+
     if(!$err)
     {
         $_SESSION['commande']['echantillons'] = array_slice($_SESSION['commande']['echantillons'], 0, $nbEchantillons);
@@ -137,6 +165,7 @@ if(!isset($_POST['change-nb-enchantillons'])  && isset($_POST['suivant']))
             }
         }
     }
+
     if(!$err)
     {
         if($inclusion)
@@ -158,8 +187,6 @@ if(!isset($_POST['change-nb-enchantillons'])  && isset($_POST['suivant']))
     }
 }
 
-var_dump($_FILES, $_POST);
-
 require "inc/header.php";
 ?>
 <div class="container">
@@ -179,7 +206,7 @@ require "inc/header.php";
                 <?php
                 }
                 ?>
-                <form action="echantillons.php" method="POST" id="main">
+                <form action="echantillons.php" method="post" id="main">
                     <table class="table">
                         <thead>
                             <tr>
@@ -347,7 +374,7 @@ require "inc/header.php";
                     <input type="submit" class="btn btn-primary pull-right" name="suivant" value="Suivant">
                 </form>
 
-                <form id="import-xls" action="" method="post" enctype="multipart/form-data">
+                <form id="import-xls" action="echantillons.php" method="post" enctype="multipart/form-data">
                     <div id="encart-import-xls">
                         <h4>Importer les identifications animales</h4>
                         <p class="info text-center">Vous pouvez importer les identifiants des animaux à partir d'un fichier Excel. Pour se faire,
@@ -357,7 +384,7 @@ require "inc/header.php";
                             <label class="btn btn-default" ><span class="glyphicon glyphicon-file"></span> Sélectionner un fichier
                                 <input style="display: none !important;" name="import" type="file" accept=".csv, .xls, .xlsx">
                             </label>
-                            <input type="submit" name="submit-import" id="send-import-btn" disabled="disabled" class="btn btn-default" value="Envoyer le fichier">
+                            <input type="submit" name="submit-import" disabled id="send-import-btn" class="btn btn-default" value="Envoyer le fichier">
                         </div>
                     </div>
                 </form>
