@@ -55,7 +55,7 @@ require "inc/header.php";
             <div class="form-group">
                 <label for="utilisateur" class="col-sm-5">Recherche par utilisateur : </label>
                 <div class="col-md-7">
-                    <input type="text" class="form-control col-md-7" value="<?=$utilisateur['prenomUtilisateur'].' '.$utilisateur['nomUtilisateur']?>" disabled id="utilisateur" name="utilisateur"/>
+                    <input type="text" class="form-control col-md-7" id="utilisateur" name="utilisateur" placeholder="Utilisateur"/>
                 </div>
             </div>
             <div class="form-group">
@@ -70,7 +70,7 @@ require "inc/header.php";
         <?php
         }
         else {
-            $commandes = $db->getArchives($type, $_POST['commande'], $utilisateur['nomCentre'] . "-" . $utilisateur['nomEquipe'], $_POST['annee'], $utilisateur['nomUtilisateur'].' '.$utilisateur['prenomUtilisateur'],
+            $commandes = $db->getArchives($type, $_POST['commande'], $utilisateur['nomCentre'] . "-" . $utilisateur['nomEquipe'], $_POST['annee'], $_POST['utilisateur'],
                 $_POST['echantillon']);
             ?>
         <table class="table table-archives">
