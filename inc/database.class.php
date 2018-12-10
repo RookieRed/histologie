@@ -399,8 +399,9 @@ class Database {
 
     public function getCommandeById($idCommande)
     {
-        $commande = $this->query('SELECT c.*, CONCAT(u.prenomUtilisateur, " ", u.nomUtilisateur) as utilisateur FROM Commande c, Utilisateur u '
-            . ' WHERE c.idUtilisateur = u.idUtilisateur AND idCommande = ? ', $idCommande);
+        $commande = $this->query('SELECT c.*, CONCAT(u.prenomUtilisateur, " ", u.nomUtilisateur) as utilisateur, e.nomEquipe '
+            . ' FROM Commande c, Utilisateur u, Equipe e '
+            . ' WHERE e.idEquipe = u.idEquipe AND c.idUtilisateur = u.idUtilisateur AND idCommande = ? ', $idCommande);
         if(isset($commande[0]))
             $commande = $commande[0];
         else
