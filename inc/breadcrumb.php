@@ -5,7 +5,7 @@ if (!isset($_SESSION['commande'])) {
 }
 $newCommand = $_SESSION['commande'];
 
-const BREADCRUMB = [
+$BREADCRUMB = [
     [
         'name' => 'Echantillons',
         'link' => '/echantillons.php'
@@ -32,18 +32,20 @@ const BREADCRUMB = [
     ],
 ];
 
-$actualIndex = (function() use($newCommand) {
+if ($newCommand['type'] === 'C') {
+    unset($BREADCRUMB[1]);
+    $BREADCRUMB = array_values($BREADCRUMB);
+}
+
+$actualIndex = (function() use($BREADCRUMB, $newCommand) {
     $index = 0;
-    $actualIndex = array_reduce(BREADCRUMB, function($ret, $elem) use(&$index) {
+    $actualIndex = array_reduce($BREADCRUMB, function($ret, $elem) use(&$index) {
         $index++;
         if ($ret === null && strstr($_SERVER['REQUEST_URI'], $elem['link'])) {
             return $index;
         }
         return $ret;
     });
-    if ($newCommand['type'] === 'C' && $actualIndex >= 3) {
-        return $actualIndex - 1;
-    }
     return $actualIndex;
 })();
 
@@ -51,27 +53,28 @@ $maxIndex = (function() use($actualIndex) {
     return $_SESSION['commande']['maxIndex'] = max($actualIndex, $_SESSION['commande']['maxIndex']);
 })();
 
-function isVisible($elem) {
+function isClickable($elem, $j) {
     global $newCommand;
-    return !($elem['name'] === 'Inclusion' && $newCommand['type'] === 'C');
+    global $maxIndex;
+    global $BREADCRUMB;
+    global $actualIndex;
+    return $actualIndex >= $j && !isDisabled($elem) && $maxIndex <= count($BREADCRUMB) - 1 && !($elem['name'] === 'Inclusion' && $newCommand['type'] === 'C');
 }
 
 function isDisabled($elem) {
-    global $newCommand;
+    global $BREADCRUMB;
     global $maxIndex;
-    if ($maxIndex === 5 && $newCommand['type'] === 'C' || $maxIndex === 6) {
-        return true;
-    }
     switch ($elem['name']) {
         case 'Echantillons':
-        case 'Confirmation':
             return false;
         case 'Inclusion':
         case 'Coupe':
         case 'Coloration':
             return compterOperations(strtolower($elem['name'])) == 0;
         case 'Récapitulatif':
-            return !($maxIndex > 4 || ($maxIndex >= 4 && $newCommand['type'] === 'C'));
+            return $maxIndex <= count($BREADCRUMB) - 2;
+        case 'Confirmation':
+            return $maxIndex <= count($BREADCRUMB) - 1;
     }
     return true;
 }
@@ -81,18 +84,16 @@ $j = 0;
 ?>
 <ul id="breadcrumb">
     <?php
-    foreach (BREADCRUMB as $elem) {
-        if (isVisible($elem)) {
-            $j++;
-            ?>
-            <li class="step<?= $j <= $actualIndex ? ' passed' : '' ?><?= isDisabled($elem) ? ' disabled' : ''?>">
-                <a <?= $elem !== BREADCRUMB[5] || $j > $maxIndex || isDisabled($elem) ? '' : 'href="'.$elem['link'].'"'?>>
-                    <span class="number"><?= $j ?></span>
-                    <span class="link-label"><?= $elem['name'] ?></span>
-                </a>
-            </li>
-            <?php
-        }
+    foreach ($BREADCRUMB as $elem) {
+        $j++;
+        ?>
+        <li class="step<?= $j <= $actualIndex ? ' passed' : '' ?><?= isDisabled($elem) ? ' disabled' : ''?> <?= isClickable($elem, $j) ? 'clickable' : '' ?>">
+            <a <?= isClickable($elem, $j) ? 'href="'.$elem['link'].'"' : '' ?>>
+                <span class="number"><?= $j ?></span>
+                <span class="link-label"><?= $elem['name'] ?></span>
+            </a>
+        </li>
+        <?php
     }
     ?>
 </ul>

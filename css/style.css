@@ -378,8 +378,12 @@ div#recap-popup .events .time-box:not(:nth-child(2)):before {
 #breadcrumb > li.step.passed:not(.disabled) {
     color: white;
     background: #337ab7;
+}
+
+#breadcrumb > li.clickable {
     cursor: pointer;
 }
+
 
 #breadcrumb > li.step.passed:not(.disabled):after {
     background: #337ab7;
