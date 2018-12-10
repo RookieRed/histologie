@@ -8,7 +8,7 @@ use \Spipu\Html2Pdf\Exception\Html2PdfException;
 
 $idCommande  = $_GET['idCommande'];
 
-if (! isset($idCommande) || $idCommande === null) {
+if (!isset($idCommande) || $idCommande === null) {
     header("Location: /index.php");
     exit;
 }
@@ -18,12 +18,12 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '/commande/pdf/';
 $filename = 'Commande-' . $numCommande . '.pdf';
 
 if (!file_exists($path . $filename)) {
-    $commande = $db->getCommandeById($idCommande);
-    if(!isset($commande)) {
+    $newCommand = $db->getCommandeById($idCommande);
+    if(!isset($newCommand)) {
         header("HTTP/1.0 404 Not Found");
         exit;
     }
-    $utilisateur = $db->getUtilisateur($commande['idUtilisateur']);
+    $utilisateur = $db->getUtilisateur($newCommand['idUtilisateur']);
     try {
         ob_start();
         require_once 'fiche.php';
