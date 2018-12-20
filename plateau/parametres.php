@@ -30,7 +30,7 @@ require "../inc/header.php";
 <div class="container">
     <?php if ($err) { ?>
         <div class="alert alert-error text-center">
-            <?= $err ?>
+            <?= $message ?>
         </div>
     <?php } ?>
     <div class="row">
