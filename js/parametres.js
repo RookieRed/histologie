@@ -84,6 +84,20 @@ $(document).ready(function() {
         });
     });
 
+    $("input[name=import]").on('change', function () {
+        const input = $(this);
+
+        const submit = $("input#send-logo-btn");
+        if (input.val() != null) {
+            submit.prop( "disabled", false );
+            submit.addClass('btn-primary');
+        } else {
+            submit.prop( "disabled", true );
+            submit.addClass('btn-default');
+            submit.removeClass('btn-primary');
+        }
+    });
+
     $(document).on('keydown', 'input', function(ev) {
         if(ev.which === 13) {
             $(this).closest('tr').find(".ajouter").click();

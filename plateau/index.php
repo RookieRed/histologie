@@ -4,9 +4,6 @@ require "../inc/header.php";
 ?>
 <div class="container">
     <div class="col-md-6 col-md-offset-3">
-        <div class="alert alert-success text-center">
-            <?=genererMessagePlateau($administrateur)?>
-        </div>
         <div class="panel panel-primary">
             <div class="panel-heading">Bienvenue!</div>
             <div class="panel-body text-center">

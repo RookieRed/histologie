@@ -14,10 +14,10 @@ if (!isset($idCommande) || $idCommande === null) {
 }
 
 $numCommande = $db->getNumCommande($idCommande);
-$path = $_SERVER['DOCUMENT_ROOT'] . '/commande/pdf/';
+$pdfPath = $_SERVER['DOCUMENT_ROOT'] . '/commande/pdf/';
 $filename = 'Commande-' . $numCommande . '.pdf';
 
-if (!file_exists($path . $filename)) {
+if (!file_exists($pdfPath . $filename)) {
     $newCommand = $db->getCommandeById($idCommande);
     if(!isset($newCommand)) {
         header("HTTP/1.0 404 Not Found");
@@ -31,7 +31,7 @@ if (!file_exists($path . $filename)) {
 
         $html2pdf = new Html2Pdf('P', 'A4', 'fr', true, 'UTF-8', [8, 10, 8, 10]);
         $html2pdf->writeHTML($content);
-        $html2pdf->output($path . $filename, 'FD');
+        $html2pdf->output($pdfPath . $filename, 'FD');
     } catch (Html2PdfException $e) {
         $html2pdf->clean();
         $formatter = new ExceptionFormatter($e);
@@ -41,5 +41,5 @@ if (!file_exists($path . $filename)) {
 } else {
     header('Content-type: application/pdf');
     header("Content-Disposition:attachment;filename='$filename'");
-    readfile($path . $filename);
+    readfile($pdfPath . $filename);
 }

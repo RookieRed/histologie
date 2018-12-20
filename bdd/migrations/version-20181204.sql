@@ -24,3 +24,20 @@ ALTER TABLE `Lame`
   FOREIGN KEY (`idColoration`) REFERENCES `Coloration`(`idColoration`)
   ON DELETE RESTRICT ON UPDATE RESTRICT;
 
+
+-- ----------------
+-- Table Fichiers
+-- ----------------
+
+CREATE TABLE `histologie`.`Fichier`
+(
+  `idFichier` INT NOT NULL AUTO_INCREMENT ,
+  `nomFichier` VARCHAR(70) NOT NULL ,
+  `cheminFichier` VARCHAR(256) NOT NULL ,
+  `typeFichier` VARCHAR(20) NOT NULL ,
+  `dateCreation` DATETIME DEFAULT NOW() NOT NULL ,
+  PRIMARY KEY (`idFichier`)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `Fichier`(`nomFichier`, `cheminFichier`, `typeFichier`)
+VALUES ('histo.jpg', '/web/img/', 'LOGO');

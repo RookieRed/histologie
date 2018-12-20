@@ -899,4 +899,19 @@ class Database {
         return $this->execute('DELETE FROM Commande WHERE idCommande = ?', $idCommande);
     }
 
+    public function ajouterLogo($fileName, $folder)
+    {
+        return $this->execute('INSERT INTO `Fichier`(`nomFichier`, `cheminFichier`, `typeFichier`) VALUES (?, ?, ?)',
+            $fileName, $folder, 'LOGO');
+    }
+
+    public function getLastLogoPath()
+    {
+        $logos = $this->query('SELECT * FROM Fichier WHERE typeFichier = ? ORDER BY dateCreation DESC LIMIT 1', 'LOGO');
+        if ($logos && count($logos) > 0) {
+            return $logos[0]['cheminFichier'] . $logos[0]['nomFichier'];
+        }
+        return null;
+    }
+
 }

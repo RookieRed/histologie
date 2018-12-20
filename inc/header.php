@@ -8,11 +8,11 @@
         <!-- Affichage du titre paramètré pour chaque page, si il est oublié
         on affiche juste "Horaires Décalés" -->
         <title><?=isset($titre) ? $titre . " | " : ""?>Histologie</title>
-        <link rel="stylesheet" href="<?=$path?>/css/bootstrap.min.css" type="text/css">
-        <link rel="stylesheet" href="<?=$path?>/css/bootstrap-datepicker3.min.css" type="text/css">
-        <link rel="stylesheet" href="<?=$path?>/css/style.css" type="text/css">
-        <link rel="stylesheet" href="<?=$path?>/css/sweetalert.css" type="text/css">
-        <link rel="stylesheet" href="<?=$path?>/css/datatables.min.css" type="text/css">
+        <link rel="stylesheet" href="<?=$pdfPath?>/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="<?=$pdfPath?>/css/bootstrap-datepicker3.min.css" type="text/css">
+        <link rel="stylesheet" href="<?=$pdfPath?>/css/style.css" type="text/css">
+        <link rel="stylesheet" href="<?=$pdfPath?>/css/sweetalert.css" type="text/css">
+        <link rel="stylesheet" href="<?=$pdfPath?>/css/datatables.min.css" type="text/css">
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -35,11 +35,11 @@
                     <ul class="nav navbar-nav navbar-right">
                         <?php if(estConnecte()) { ?>
                         <li>
-                            <a href="<?=$path?>/logout.php">Déconnexion</a>
+                            <a href="<?=$pdfPath?>/logout.php">Déconnexion</a>
                         </li>
                         <?php } ?>
                         <li>
-                            <a href="index.php" class="navbar-brand"><img src="<?=$path?>/img/histo.jpg" alt="Logo histographie"/></a>
+                            <a href="index.php" class="navbar-brand"><img src="<?=$db->getLastLogoPath()?>" alt="Logo histographie"/></a>
                         </li>
                     </ul>
                 </div>

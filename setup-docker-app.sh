@@ -16,8 +16,8 @@ fi;
 
 docker-compose up -d;
 docker-compose exec php /bin/bash \
-    -c "mkdir -p /web/logs /web/commande/pdf; \
-        chown -R www-data:www-data /web/logs /web/commande/pdf /web/bdd/backups/; \
+    -c "mkdir -p /web/logs /web/commande/pdf /web/img/logos; \
+        chown -R www-data:www-data /web/logs /web/commande/pdf /web/bdd/backups/ /web/img/; \
         cd /web && composer install;";
 docker-compose exec mysql /bin/bash \
     -c "crontab -r; \

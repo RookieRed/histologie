@@ -93,7 +93,7 @@ function sendMail($from, $to, $subject, $modeleMail, $search, $replace)
 {
     global $config;
     global $logger;
-    global $path;
+    global $pdfPath;
 
     $logger->log("Mail", "DEBUG", 'Trying to send mail ' . $modeleMail . ' from ' . (is_array($from) ? $from['mail'] : $from) . ' to ' . print_r($to, true) . '.');
     //Récupération du dossier dans lequel trouver les modèles depuis la configuration
@@ -119,7 +119,7 @@ function sendMail($from, $to, $subject, $modeleMail, $search, $replace)
     }
 
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . $path . '/inc/PHPMailerAutoload.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . $pdfPath . '/inc/PHPMailerAutoload.php';
     $mail = new PHPMailer;
     $mail->CharSet = 'UTF-8';
     $mail->isSMTP();
@@ -273,17 +273,6 @@ function compterOperations($operation)
             $nbOperations++;
     }
     return $nbOperations;
-}
-
-function genererMessagePlateau($administrateur)
-{
-    $verbes = ['replendissez', 'rayonnez'];
-    $cafe = ["un café", "un croissant", "une chocolatine"];
-    mt_srand(date("dmY"));
-    return "Bonjour " . $administrateur['nomAdmin'] . "!<br />
-    Vous avez bonne mine ce" . (date("H") < 12 ? " matin" : "t après-midi") . ", vous " . $verbes[mt_rand(0, count($verbes)-1)] . ".<br>
-    JJ est parti vous chercher " . $cafe[mt_rand(0, count($cafe)-1)] . " il arrive tout de suite.<br>
-    Que souhaitez-vous faire aujourd'hui?";
 }
 
 /**
