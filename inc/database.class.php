@@ -224,14 +224,14 @@ class Database {
                                    GROUP BY c.idCommande, numCommande, commentairePlateau, dateRetourCommande, dateCommande
                                    HAVING MIN(
                                        CASE
-                                           WHEN dateReceptionCommande IS NULL THEN "Non reçue"
+                                           WHEN dateReceptionCommande IS NULL THEN "En attente de réception"
                                            WHEN dateRetourCommande IS NOT NULL THEN "Retournée"
-                                           WHEN l.idColoration IS NOT NULL AND l.dateColoration IS NULL THEN " Coloration"
-                                           WHEN e.epaisseurCoupes IS NOT NULL AND e.dateCoupe IS NULL THEN "  Coupe"
-                                           WHEN e.idInclusion IS NOT NULL AND e.dateInclusion IS NULL THEN "   Inclusion"
-                                           ELSE "En cours"
+                                           WHEN l.idColoration IS NOT NULL AND l.dateColoration IS NULL THEN "Coloration"
+                                           WHEN e.epaisseurCoupes IS NOT NULL AND e.dateCoupe IS NULL THEN "Coupe"
+                                           WHEN e.idInclusion IS NOT NULL AND e.dateInclusion IS NULL THEN "Inclusion"
+                                           ELSE "Terminée"
                                        END
-                                   ) = "En cours"
+                                   ) = "Terminée"
                                    ORDER BY c.idCommande DESC', $type);
         return $commandes;
     }
@@ -309,12 +309,12 @@ class Database {
                              DATE_FORMAT(dateRetourCommande, "%d-%m-%Y") dateRetourCommande,
                              DATE_FORMAT(dateCommande, "%d-%m-%Y") dateCommande,
                              MIN(CASE
-                                WHEN dateReceptionCommande IS NULL THEN "Non reçue"
+                                WHEN dateReceptionCommande IS NULL THEN "En attente de réception"
                                 WHEN dateRetourCommande IS NOT NULL THEN "Retournée"
                                 WHEN e.idInclusion IS NOT NULL AND e.dateInclusion IS NULL THEN "Inclusion"
                                 WHEN e.epaisseurCoupes IS NOT NULL AND e.dateCoupe IS NULL THEN "Coupe"
                                 WHEN l.idColoration IS NOT NULL AND l.dateColoration IS NULL THEN "Coloration"
-                                ELSE "En cours"
+                                ELSE "Terminée"
                              END) AS etat
                              FROM Commande c
                              LEFT JOIN Echantillon e ON c.idCommande = e.idCommande
