@@ -40,4 +40,4 @@ CREATE TABLE `histologie`.`Fichier`
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `Fichier`(`nomFichier`, `cheminFichier`, `typeFichier`)
-VALUES ('histo.jpg', '/web/img/', 'LOGO');
+VALUES ('histo.jpg', '/img/', 'LOGO');
