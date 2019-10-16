@@ -1,3 +1,5 @@
+LGPL-3.0-or-later
+
 # Histologie
 
 This application works with : 
