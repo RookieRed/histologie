@@ -1,5 +1,6 @@
 <?php
 require "inc/include.php";
+
 if(!empty($_POST['mail']) && !empty($_POST['password']))
 {
     $idUtilisateur = $db->getIdUtilisateur($_POST['mail']);
