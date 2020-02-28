@@ -231,7 +231,6 @@ function connectLDAP($username, $password)
         $erreurServeur = false;
         try {
             $bind = ldap_bind($ldap, "uid=" . $username . ",".$config['ldap_dn_users'], $password);
-            var_dump(ldap_error($ldap));
         }
         catch(ErrorException $err)
         {

@@ -21,7 +21,7 @@ ldap_url ldaps://ldap1.inserm.fr
 ldap_url ldaps://ldap2.inserm.fr
 ldap_url ldaps://ldap3.inserm.fr
 ldap_port 636
-ldap_dn_users ou=users,dc=inserm.fr,dc=local
+ldap_dn_users ou=users,dc=blob.fr,dc=local
 
 # Il doit au moins exister un fichier .txt par mail, et, optionnellement, un fichier .html du même nom.
 # Le dossier dans lequel sont contenus les mails est à paramètrer dans le fichier config.cfg

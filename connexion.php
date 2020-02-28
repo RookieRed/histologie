@@ -3,7 +3,32 @@ require "inc/include.php";
 
 if(!empty($_POST['mail']) && !empty($_POST['password']))
 {
-    $idUtilisateur = $db->getIdUtilisateur($_POST['mail']);
+    //Tente une connexion via l'annuaire LDAP
+    try {
+        $userInfos = connectLDAP($_POST['mail'], $_POST['password']);
+    }
+    catch(ErrorException $err)
+    {
+        //Exception lorsque les serveurs LDAP sont inaccessibles
+        $userInfos = false;
+        $message = $err->getMessage();
+    }
+    if($userInfos !== false)
+    {
+        //Récuperation de l'id de la personne à partir de son adresse mail
+        $idUtilisateur = $db->getIdUtilisateur($userInfos['mail']);
+        //Si la personne n'existe pas, on la rajoute
+        if($idUtilisateur === false)
+        {
+            //Expression réguliaire permettant de récupérer l'unité et l'équipe de l'utilisateur
+            $regex = '/[A-Z]+-U(?<unite>[0-9]+)-EQ(?<equipe>[0-9]+)/';
+            preg_match_all($regex, $userInfos['unite_equipe'], $matches, PREG_SET_ORDER, 0);
+            $unite = $matches[0]['unite'];
+            $equipe = $matches[0]['equipe'];
+
+            $idUtilisateur = $db->insererUtilisateur($userInfos['mail'], $userInfos['nom'], $userInfos['prenom'], $unite, $equipe);
+        }
+    }
     if($idUtilisateur !== false)
     {
         $_SESSION['idUtilisateur'] = $idUtilisateur;
