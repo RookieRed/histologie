@@ -414,12 +414,13 @@ function estConnecte() {
 //   -Et qu'on est dans la partie plateau
 // -Si on est pas sur la page de connexion (pour éviter une redirection infinie)
 // - Si on est pas dans la partie commande
-if(((!isset($utilisateur) && strpos($_SERVER['SCRIPT_FILENAME'], "/plateau") === false)
-        || (!isset($administrateur) && strpos($_SERVER['SCRIPT_FILENAME'], "/plateau") !== false))
+if(!estConnecte()
     && strpos($_SERVER['SCRIPT_FILENAME'], "connexion.php") === false
     && strpos($_SERVER['SCRIPT_NAME'], '/commande/telecharger.php') === false
     && strpos($_SERVER['SCRIPT_NAME'], '/plateau/ajax/echantillons.php') === false
 ) {
+//    var_dump($_POST);
+//    die;
     header("Location: connexion.php");
     exit;
 }

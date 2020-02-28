@@ -1,6 +1,8 @@
 <?php
 require "inc/include.php";
 
+//var_dump($_SESSION);
+
 if(!empty($_POST['mail']) && !empty($_POST['password']))
 {
     //Tente une connexion via l'annuaire LDAP
@@ -28,15 +30,15 @@ if(!empty($_POST['mail']) && !empty($_POST['password']))
 
             $idUtilisateur = $db->insererUtilisateur($userInfos['mail'], $userInfos['nom'], $userInfos['prenom'], $unite, $equipe);
         }
+        if($idUtilisateur !== false)
+        {
+            $_SESSION['idUtilisateur'] = $idUtilisateur;
+            $logger->log("Application", "INFO", "Utilisateur connecté : " . $_POST['mail'] . " ( " . $idUtilisateur . " )");
+            header("Location: index.php");
+            exit;
+        }
     }
-    if($idUtilisateur !== false)
-    {
-        $_SESSION['idUtilisateur'] = $idUtilisateur;
-        $logger->log("Application", "INFO", "Utilisateur connecté : " . $_POST['mail'] . " ( " . $idUtilisateur . " )");
-        header("Location: index.php");
-        exit;
-    }
-    elseif(empty($message)) {
+    else {
         $message = "Adresse mail ou mot de passe incorrect!";
     }
 }
@@ -54,7 +56,7 @@ require "inc/header.php";
             <div class="panel-body">
                 <?php
                 //Si une tentative a été effectuée, mais qu'on est toujours sur l'index -> Erreur
-                if(!empty($_POST['mail'])) {
+                if($_POST['mail']) {
                 ?>
                 <div class="alert alert-danger">
                     <?=$message?>
